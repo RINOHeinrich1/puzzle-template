@@ -1,0 +1,5115 @@
+{
+  "schemaVersion": 1,
+  "kind": "template",
+  "id": "puzzle",
+  "name": "Puzzle",
+  "description": "Moteur de composition de pages et de conversation personnalisables.",
+  "version": "1.1.0-beta.3",
+  "publisher": {
+    "id": "onirtech",
+    "name": "ONIRTECH",
+    "trustLevel": "official"
+  },
+  "compatibility": {
+    "hostProtocol": "onirtech.template-host.v1"
+  },
+  "ui": {
+    "mode": "web-component",
+    "entry": "./index.js",
+    "element": "onirtech-template-puzzle",
+    "integrity": "sha256-bt+EQIc7tEaMZ73ObhgZQhFDpatV52TH0yAyDrnlP/M=",
+    "shadowDom": "open"
+  },
+  "capabilities": [
+    "messages",
+    "media",
+    "theme"
+  ],
+  "network": [],
+  "identificationModes": [
+    "contact",
+    "anonymous"
+  ],
+  "params": [
+    {
+      "key": "site_settings",
+      "label": "Site settings",
+      "type": "object",
+      "default": {
+        "site_name": "Puzzle",
+        "home_page_id": "home",
+        "theme_mode": "light",
+        "chat_mode": "embedded",
+        "chat_page_id": "home",
+        "public_browsing": true,
+        "config_version": "1"
+      },
+      "properties": [
+        {
+          "key": "site_name",
+          "label": "Site name",
+          "type": "string",
+          "default": "Puzzle",
+          "maxLength": 120
+        },
+        {
+          "key": "home_page_id",
+          "label": "Home page id",
+          "type": "string",
+          "default": "home",
+          "maxLength": 120
+        },
+        {
+          "key": "theme_mode",
+          "label": "Theme mode",
+          "type": "select",
+          "default": "light",
+          "options": [
+            {
+              "value": "light",
+              "label": "light"
+            },
+            {
+              "value": "dark",
+              "label": "dark"
+            },
+            {
+              "value": "auto",
+              "label": "auto"
+            }
+          ]
+        },
+        {
+          "key": "chat_mode",
+          "label": "Chat mode",
+          "type": "select",
+          "default": "embedded",
+          "options": [
+            {
+              "value": "embedded",
+              "label": "embedded"
+            },
+            {
+              "value": "floating",
+              "label": "floating"
+            },
+            {
+              "value": "disabled",
+              "label": "disabled"
+            }
+          ]
+        },
+        {
+          "key": "chat_page_id",
+          "label": "Chat page id",
+          "type": "string",
+          "default": "home",
+          "maxLength": 120
+        },
+        {
+          "key": "public_browsing",
+          "label": "Public browsing",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "key": "config_version",
+          "label": "Config version",
+          "type": "string",
+          "default": "1",
+          "maxLength": 120
+        }
+      ]
+    },
+    {
+      "key": "global_theme",
+      "label": "Global theme",
+      "type": "object",
+      "default": {
+        "primary": "#a13d30",
+        "secondary": "#3d6b5c",
+        "background": "#f7f3ec",
+        "surface": "#fffdf8",
+        "text_color": "#252720",
+        "muted": "#6b645c",
+        "border_color": "#e7ded2",
+        "accent": "#d8a94b",
+        "dark_background": "#22231f",
+        "dark_surface": "#2d2f28",
+        "dark_text": "#f2eee4",
+        "dark_muted": "#bdbbb0",
+        "dark_border": "#484a40",
+        "font_family": "system",
+        "base_font_size": 16,
+        "max_width": 1240,
+        "base_gap": 24,
+        "base_radius": 2
+      },
+      "properties": [
+        {
+          "key": "primary",
+          "label": "Primary",
+          "type": "color",
+          "default": "#244b78"
+        },
+        {
+          "key": "secondary",
+          "label": "Secondary",
+          "type": "color",
+          "default": "#53677b"
+        },
+        {
+          "key": "background",
+          "label": "Background",
+          "type": "color",
+          "default": "#ffffff"
+        },
+        {
+          "key": "surface",
+          "label": "Surface",
+          "type": "color",
+          "default": "#f4f6f8"
+        },
+        {
+          "key": "text_color",
+          "label": "Text color",
+          "type": "color",
+          "default": "#172033"
+        },
+        {
+          "key": "muted",
+          "label": "Muted",
+          "type": "color",
+          "default": "#627084"
+        },
+        {
+          "key": "border_color",
+          "label": "Border color",
+          "type": "color",
+          "default": "#dce1e7"
+        },
+        {
+          "key": "accent",
+          "label": "Accent",
+          "type": "color",
+          "default": "#147d64"
+        },
+        {
+          "key": "dark_background",
+          "label": "Dark background",
+          "type": "color",
+          "default": "#121820"
+        },
+        {
+          "key": "dark_surface",
+          "label": "Dark surface",
+          "type": "color",
+          "default": "#202a35"
+        },
+        {
+          "key": "dark_text",
+          "label": "Dark text",
+          "type": "color",
+          "default": "#f0f3f7"
+        },
+        {
+          "key": "dark_muted",
+          "label": "Dark muted",
+          "type": "color",
+          "default": "#b5c1ce"
+        },
+        {
+          "key": "dark_border",
+          "label": "Dark border",
+          "type": "color",
+          "default": "#394656"
+        },
+        {
+          "key": "font_family",
+          "label": "Font family",
+          "type": "select",
+          "default": "system",
+          "options": [
+            {
+              "value": "system",
+              "label": "system"
+            },
+            {
+              "value": "serif",
+              "label": "serif"
+            },
+            {
+              "value": "monospace",
+              "label": "monospace"
+            }
+          ]
+        },
+        {
+          "key": "base_font_size",
+          "label": "Base font size",
+          "type": "number",
+          "default": 16,
+          "min": 12,
+          "max": 24
+        },
+        {
+          "key": "max_width",
+          "label": "Max width",
+          "type": "number",
+          "default": 1200,
+          "min": 320,
+          "max": 1920
+        },
+        {
+          "key": "base_gap",
+          "label": "Base gap",
+          "type": "number",
+          "default": 16,
+          "min": 0,
+          "max": 64
+        },
+        {
+          "key": "base_radius",
+          "label": "Base radius",
+          "type": "number",
+          "default": 10,
+          "min": 0,
+          "max": 64
+        }
+      ]
+    },
+    {
+      "key": "pages",
+      "label": "Pages",
+      "type": "array",
+      "default": [
+        {
+          "id": "home",
+          "slug": "accueil",
+          "title": "Accueil",
+          "description": "",
+          "header_id": "header_main",
+          "footer_id": "footer_main",
+          "left_sidebar_id": "",
+          "right_sidebar_id": "",
+          "style_id": "",
+          "published": true,
+          "layout": "standard"
+        },
+        {
+          "id": "about",
+          "slug": "a-propos",
+          "title": "À propos",
+          "description": "",
+          "header_id": "header_main",
+          "footer_id": "footer_main",
+          "left_sidebar_id": "",
+          "right_sidebar_id": "",
+          "style_id": "",
+          "published": true,
+          "layout": "standard"
+        },
+        {
+          "id": "journal",
+          "slug": "journal",
+          "title": "Journal",
+          "description": "",
+          "header_id": "header_main",
+          "footer_id": "footer_main",
+          "left_sidebar_id": "journal_sidebar",
+          "right_sidebar_id": "",
+          "style_id": "",
+          "published": true,
+          "layout": "standard"
+        },
+        {
+          "id": "legal",
+          "slug": "mentions",
+          "title": "Informations légales",
+          "description": "",
+          "header_id": "header_main",
+          "footer_id": "footer_main",
+          "left_sidebar_id": "",
+          "right_sidebar_id": "",
+          "style_id": "",
+          "published": true,
+          "layout": "standard"
+        }
+      ],
+      "items": {
+        "type": "object",
+        "default": {
+          "id": "",
+          "slug": "",
+          "title": "",
+          "description": "",
+          "header_id": "",
+          "footer_id": "",
+          "left_sidebar_id": "",
+          "right_sidebar_id": "",
+          "style_id": "",
+          "published": true,
+          "layout": "standard"
+        },
+        "properties": [
+          {
+            "key": "id",
+            "label": "Id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "slug",
+            "label": "Slug",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "description",
+            "label": "Description",
+            "type": "string",
+            "default": "",
+            "maxLength": 240
+          },
+          {
+            "key": "header_id",
+            "label": "Header id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "footer_id",
+            "label": "Footer id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "left_sidebar_id",
+            "label": "Left sidebar id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "right_sidebar_id",
+            "label": "Right sidebar id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "style_id",
+            "label": "Style id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "published",
+            "label": "Published",
+            "type": "boolean",
+            "default": true
+          },
+          {
+            "key": "layout",
+            "label": "Layout",
+            "type": "select",
+            "default": "standard",
+            "options": [
+              {
+                "value": "standard",
+                "label": "standard"
+              },
+              {
+                "value": "wide",
+                "label": "wide"
+              },
+              {
+                "value": "full",
+                "label": "full"
+              }
+            ]
+          }
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 30
+    },
+    {
+      "key": "regions",
+      "label": "Regions",
+      "type": "array",
+      "default": [
+        {
+          "id": "header_main",
+          "name": "En-tête principal",
+          "kind": "header",
+          "style_id": "header_style",
+          "variant": "standard",
+          "sticky": false,
+          "mobile_mode": "auto"
+        },
+        {
+          "id": "footer_main",
+          "name": "Pied de page",
+          "kind": "footer",
+          "style_id": "",
+          "variant": "standard",
+          "sticky": false,
+          "mobile_mode": "auto"
+        },
+        {
+          "id": "journal_sidebar",
+          "name": "Navigation du journal",
+          "kind": "sidebar",
+          "style_id": "sidebar_style",
+          "variant": "standard",
+          "sticky": false,
+          "mobile_mode": "auto"
+        }
+      ],
+      "items": {
+        "type": "object",
+        "default": {
+          "id": "",
+          "name": "",
+          "kind": "header",
+          "style_id": "",
+          "variant": "standard",
+          "sticky": false,
+          "mobile_mode": "auto"
+        },
+        "properties": [
+          {
+            "key": "id",
+            "label": "Id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "name",
+            "label": "Name",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "kind",
+            "label": "Kind",
+            "type": "select",
+            "default": "header",
+            "options": [
+              {
+                "value": "header",
+                "label": "header"
+              },
+              {
+                "value": "footer",
+                "label": "footer"
+              },
+              {
+                "value": "sidebar",
+                "label": "sidebar"
+              }
+            ]
+          },
+          {
+            "key": "style_id",
+            "label": "Style id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "variant",
+            "label": "Variant",
+            "type": "select",
+            "default": "standard",
+            "options": [
+              {
+                "value": "standard",
+                "label": "standard"
+              },
+              {
+                "value": "compact",
+                "label": "compact"
+              },
+              {
+                "value": "centered",
+                "label": "centered"
+              },
+              {
+                "value": "split",
+                "label": "split"
+              }
+            ]
+          },
+          {
+            "key": "sticky",
+            "label": "Sticky",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "key": "mobile_mode",
+            "label": "Mobile mode",
+            "type": "select",
+            "default": "auto",
+            "options": [
+              {
+                "value": "auto",
+                "label": "auto"
+              },
+              {
+                "value": "collapse",
+                "label": "collapse"
+              },
+              {
+                "value": "stack",
+                "label": "stack"
+              },
+              {
+                "value": "hide",
+                "label": "hide"
+              }
+            ]
+          }
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 40
+    },
+    {
+      "key": "blocks",
+      "label": "Blocks",
+      "type": "array",
+      "default": [
+        {
+          "id": "brand_logo",
+          "kind": "logo",
+          "name": "",
+          "variant": "default",
+          "title": "Puzzle",
+          "subtitle": "",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "go_home",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "nav_main",
+          "kind": "menu",
+          "name": "",
+          "variant": "default",
+          "title": "",
+          "subtitle": "",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "nav_home",
+          "kind": "menu_item",
+          "name": "",
+          "variant": "default",
+          "title": "Accueil",
+          "subtitle": "",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "go_home",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "nav_about",
+          "kind": "menu_item",
+          "name": "",
+          "variant": "default",
+          "title": "À propos",
+          "subtitle": "",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "go_about",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "hero_main",
+          "kind": "hero",
+          "name": "",
+          "variant": "split",
+          "title": "À vous d’assembler la suite.",
+          "subtitle": "PUZZLE — ATELIER",
+          "text": "Un site qui prend la forme de vos idées. Assemblez vos pages, composez vos contenus et accueillez vos visiteurs à votre manière.",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "editorial_heading",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "hero_button",
+          "kind": "button",
+          "name": "",
+          "variant": "default",
+          "title": "Parler à notre assistant",
+          "subtitle": "",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "open_assistant",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "services",
+          "kind": "grid",
+          "name": "",
+          "variant": "default",
+          "title": "",
+          "subtitle": "",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": 3,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "card_one",
+          "kind": "card",
+          "name": "",
+          "variant": "editorial",
+          "title": "Une identité à vous",
+          "subtitle": "01 / DESIGN",
+          "text": "Choisissez vos couleurs, vos formes et votre typographie. Donnez à chaque détail sa place.",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "card_two",
+          "kind": "card",
+          "name": "",
+          "variant": "editorial",
+          "title": "Un espace qui évolue",
+          "subtitle": "02 / STRUCTURE",
+          "text": "Ajoutez une page, une section ou un article au fil de vos besoins.",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "card_three",
+          "kind": "card",
+          "name": "",
+          "variant": "editorial",
+          "title": "Un dialogue ouvert",
+          "subtitle": "03 / CONVERSATION",
+          "text": "Accueillez vos visiteurs et poursuivez la discussion avec votre assistant.",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "chat_main",
+          "kind": "chat",
+          "name": "",
+          "variant": "default",
+          "title": "Parlons de votre projet.",
+          "subtitle": "",
+          "text": "Vous avez une question ou une idée ? Écrivez-nous ici.",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "about_text",
+          "kind": "text",
+          "name": "",
+          "variant": "default",
+          "title": "À propos de Puzzle",
+          "subtitle": "",
+          "text": "Un moteur de composition qui sépare le contenu, la structure et le design.\n\nChaque pièce peut être déplacée, remplacée et personnalisée.",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "footer_text",
+          "kind": "text",
+          "name": "",
+          "variant": "default",
+          "title": "",
+          "subtitle": "",
+          "text": "Puzzle — Un template ONIR-CMS",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "nav_journal",
+          "kind": "menu_item",
+          "name": "",
+          "variant": "default",
+          "title": "Journal",
+          "subtitle": "",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "go_journal",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "theme_btn",
+          "kind": "button",
+          "name": "",
+          "variant": "quiet",
+          "title": "Thème",
+          "subtitle": "",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "toggle_theme",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "legal_link",
+          "kind": "link",
+          "name": "",
+          "variant": "default",
+          "title": "Informations légales",
+          "subtitle": "",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "go_legal",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "legal_text",
+          "kind": "text",
+          "name": "",
+          "variant": "default",
+          "title": "Informations légales",
+          "subtitle": "",
+          "text": "Renseignez ici les informations légales, la politique de confidentialité et les conditions de votre site.",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "hero_art",
+          "kind": "image",
+          "name": "",
+          "variant": "puzzle_art",
+          "title": "",
+          "subtitle": "",
+          "text": "",
+          "image_url": "",
+          "alt_text": "Quatre pièces de puzzle, dont une libre, en terracotta, vert et ocre.",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "section_title",
+          "kind": "heading",
+          "name": "",
+          "variant": "default",
+          "title": "Chaque pièce compte.",
+          "subtitle": "01 — LES POSSIBILITÉS",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "editorial_heading",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "tabs_main",
+          "kind": "tabs",
+          "name": "",
+          "variant": "default",
+          "title": "Explorer Puzzle",
+          "subtitle": "",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "tab_design",
+          "kind": "tab",
+          "name": "",
+          "variant": "default",
+          "title": "Design",
+          "subtitle": "",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "tab_design_text",
+          "kind": "text",
+          "name": "",
+          "variant": "default",
+          "title": "",
+          "subtitle": "",
+          "text": "Les profils de style contrôlent les couleurs, la typographie et les espacements.",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "tab_layout",
+          "kind": "tab",
+          "name": "",
+          "variant": "default",
+          "title": "Structure",
+          "subtitle": "",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "tab_layout_text",
+          "kind": "text",
+          "name": "",
+          "variant": "default",
+          "title": "",
+          "subtitle": "",
+          "text": "Les placements relient les blocs aux pages, régions et conteneurs.",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "tab_chat",
+          "kind": "tab",
+          "name": "",
+          "variant": "default",
+          "title": "Conversation",
+          "subtitle": "",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "tab_chat_text",
+          "kind": "text",
+          "name": "",
+          "variant": "default",
+          "title": "",
+          "subtitle": "",
+          "text": "Les actions de conversation sont exécutées par ONIR-CMS.",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "journal_title",
+          "kind": "heading",
+          "name": "",
+          "variant": "default",
+          "title": "Le journal",
+          "subtitle": "RESSOURCES",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "journal_list",
+          "kind": "article_list",
+          "name": "",
+          "variant": "default",
+          "title": "",
+          "subtitle": "",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "journal_side_text",
+          "kind": "text",
+          "name": "",
+          "variant": "default",
+          "title": "À découvrir",
+          "subtitle": "",
+          "text": "Les articles et guides de votre site.",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "journal_side_link",
+          "kind": "link",
+          "name": "",
+          "variant": "default",
+          "title": "Introduction à Puzzle",
+          "subtitle": "",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "go_article",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        {
+          "id": "hero_discover",
+          "kind": "button",
+          "name": "",
+          "variant": "outline",
+          "title": "Découvrir Puzzle",
+          "subtitle": "",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "go_about_hero",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        }
+      ],
+      "items": {
+        "type": "object",
+        "default": {
+          "id": "",
+          "kind": "section",
+          "name": "",
+          "variant": "default",
+          "title": "",
+          "subtitle": "",
+          "text": "",
+          "image_url": "",
+          "alt_text": "",
+          "icon_name": "",
+          "style_id": "",
+          "action_id": "",
+          "article_id": "",
+          "category": "",
+          "media_id": "",
+          "columns": -1,
+          "min_item_width": -1,
+          "text_format": "plain",
+          "visible": true,
+          "anchor": "",
+          "value": ""
+        },
+        "properties": [
+          {
+            "key": "id",
+            "label": "Id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "kind",
+            "label": "Kind",
+            "type": "select",
+            "default": "section",
+            "options": [
+              {
+                "value": "section",
+                "label": "section"
+              },
+              {
+                "value": "stack",
+                "label": "stack"
+              },
+              {
+                "value": "grid",
+                "label": "grid"
+              },
+              {
+                "value": "columns",
+                "label": "columns"
+              },
+              {
+                "value": "column",
+                "label": "column"
+              },
+              {
+                "value": "hero",
+                "label": "hero"
+              },
+              {
+                "value": "heading",
+                "label": "heading"
+              },
+              {
+                "value": "text",
+                "label": "text"
+              },
+              {
+                "value": "image",
+                "label": "image"
+              },
+              {
+                "value": "icon",
+                "label": "icon"
+              },
+              {
+                "value": "card",
+                "label": "card"
+              },
+              {
+                "value": "button",
+                "label": "button"
+              },
+              {
+                "value": "link",
+                "label": "link"
+              },
+              {
+                "value": "logo",
+                "label": "logo"
+              },
+              {
+                "value": "menu",
+                "label": "menu"
+              },
+              {
+                "value": "menu_item",
+                "label": "menu item"
+              },
+              {
+                "value": "social_links",
+                "label": "social links"
+              },
+              {
+                "value": "tabs",
+                "label": "tabs"
+              },
+              {
+                "value": "tab",
+                "label": "tab"
+              },
+              {
+                "value": "accordion",
+                "label": "accordion"
+              },
+              {
+                "value": "accordion_item",
+                "label": "accordion item"
+              },
+              {
+                "value": "divider",
+                "label": "divider"
+              },
+              {
+                "value": "spacer",
+                "label": "spacer"
+              },
+              {
+                "value": "badge",
+                "label": "badge"
+              },
+              {
+                "value": "article",
+                "label": "article"
+              },
+              {
+                "value": "article_list",
+                "label": "article list"
+              },
+              {
+                "value": "chat",
+                "label": "chat"
+              },
+              {
+                "value": "chat_trigger",
+                "label": "chat trigger"
+              },
+              {
+                "value": "media_gallery",
+                "label": "media gallery"
+              },
+              {
+                "value": "quote",
+                "label": "quote"
+              },
+              {
+                "value": "video_link",
+                "label": "video link"
+              },
+              {
+                "value": "table",
+                "label": "table"
+              },
+              {
+                "value": "list",
+                "label": "list"
+              },
+              {
+                "value": "list_item",
+                "label": "list item"
+              },
+              {
+                "value": "statistic",
+                "label": "statistic"
+              }
+            ]
+          },
+          {
+            "key": "name",
+            "label": "Name",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "variant",
+            "label": "Variant",
+            "type": "string",
+            "default": "default",
+            "maxLength": 120
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "type": "string",
+            "default": "",
+            "maxLength": 240
+          },
+          {
+            "key": "subtitle",
+            "label": "Subtitle",
+            "type": "string",
+            "default": "",
+            "maxLength": 240
+          },
+          {
+            "key": "text",
+            "label": "Text",
+            "type": "text",
+            "default": "",
+            "maxLength": 2000
+          },
+          {
+            "key": "image_url",
+            "label": "Image url",
+            "type": "image",
+            "default": ""
+          },
+          {
+            "key": "alt_text",
+            "label": "Alt text",
+            "type": "string",
+            "default": "",
+            "maxLength": 240
+          },
+          {
+            "key": "icon_name",
+            "label": "Icon name",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "style_id",
+            "label": "Style id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "action_id",
+            "label": "Action id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "article_id",
+            "label": "Article id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "category",
+            "label": "Category",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "media_id",
+            "label": "Media id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "columns",
+            "label": "Columns",
+            "type": "number",
+            "default": -1,
+            "min": -1,
+            "max": 12
+          },
+          {
+            "key": "min_item_width",
+            "label": "Min item width",
+            "type": "number",
+            "default": -1,
+            "min": -1,
+            "max": 800
+          },
+          {
+            "key": "text_format",
+            "label": "Text format",
+            "type": "select",
+            "default": "plain",
+            "options": [
+              {
+                "value": "plain",
+                "label": "plain"
+              },
+              {
+                "value": "markdown",
+                "label": "markdown"
+              }
+            ]
+          },
+          {
+            "key": "visible",
+            "label": "Visible",
+            "type": "boolean",
+            "default": true
+          },
+          {
+            "key": "anchor",
+            "label": "Anchor",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "value",
+            "label": "Value",
+            "type": "string",
+            "default": "",
+            "maxLength": 240
+          }
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 100
+    },
+    {
+      "key": "placements",
+      "label": "Placements",
+      "type": "array",
+      "default": [
+        {
+          "id": "placement_00",
+          "parent_kind": "region",
+          "parent_id": "header_main",
+          "child_id": "brand_logo",
+          "slot": "start",
+          "position": 0
+        },
+        {
+          "id": "placement_01",
+          "parent_kind": "region",
+          "parent_id": "header_main",
+          "child_id": "nav_main",
+          "slot": "end",
+          "position": 1
+        },
+        {
+          "id": "placement_02",
+          "parent_kind": "block",
+          "parent_id": "nav_main",
+          "child_id": "nav_home",
+          "slot": "content",
+          "position": 0
+        },
+        {
+          "id": "placement_03",
+          "parent_kind": "block",
+          "parent_id": "nav_main",
+          "child_id": "nav_about",
+          "slot": "content",
+          "position": 1
+        },
+        {
+          "id": "placement_04",
+          "parent_kind": "page",
+          "parent_id": "home",
+          "child_id": "hero_main",
+          "slot": "main",
+          "position": 0
+        },
+        {
+          "id": "placement_05",
+          "parent_kind": "block",
+          "parent_id": "hero_main",
+          "child_id": "hero_button",
+          "slot": "actions",
+          "position": 0
+        },
+        {
+          "id": "placement_06",
+          "parent_kind": "page",
+          "parent_id": "home",
+          "child_id": "services",
+          "slot": "main",
+          "position": 2
+        },
+        {
+          "id": "placement_07",
+          "parent_kind": "block",
+          "parent_id": "services",
+          "child_id": "card_one",
+          "slot": "content",
+          "position": 0
+        },
+        {
+          "id": "placement_08",
+          "parent_kind": "block",
+          "parent_id": "services",
+          "child_id": "card_two",
+          "slot": "content",
+          "position": 1
+        },
+        {
+          "id": "placement_09",
+          "parent_kind": "block",
+          "parent_id": "services",
+          "child_id": "card_three",
+          "slot": "content",
+          "position": 2
+        },
+        {
+          "id": "placement_10",
+          "parent_kind": "page",
+          "parent_id": "home",
+          "child_id": "chat_main",
+          "slot": "main",
+          "position": 3
+        },
+        {
+          "id": "placement_11",
+          "parent_kind": "page",
+          "parent_id": "about",
+          "child_id": "about_text",
+          "slot": "main",
+          "position": 0
+        },
+        {
+          "id": "placement_12",
+          "parent_kind": "region",
+          "parent_id": "footer_main",
+          "child_id": "footer_text",
+          "slot": "content",
+          "position": 0
+        },
+        {
+          "id": "p_nav_journal",
+          "parent_kind": "block",
+          "parent_id": "nav_main",
+          "child_id": "nav_journal",
+          "slot": "content",
+          "position": 2
+        },
+        {
+          "id": "p_theme_btn",
+          "parent_kind": "region",
+          "parent_id": "header_main",
+          "child_id": "theme_btn",
+          "slot": "end",
+          "position": 2
+        },
+        {
+          "id": "p_legal_link",
+          "parent_kind": "region",
+          "parent_id": "footer_main",
+          "child_id": "legal_link",
+          "slot": "end",
+          "position": 1
+        },
+        {
+          "id": "p_legal_text",
+          "parent_kind": "page",
+          "parent_id": "legal",
+          "child_id": "legal_text",
+          "slot": "main",
+          "position": 0
+        },
+        {
+          "id": "p_hero_art",
+          "parent_kind": "block",
+          "parent_id": "hero_main",
+          "child_id": "hero_art",
+          "slot": "media",
+          "position": 1
+        },
+        {
+          "id": "p_section_title",
+          "parent_kind": "page",
+          "parent_id": "home",
+          "child_id": "section_title",
+          "slot": "main",
+          "position": 1
+        },
+        {
+          "id": "p_tabs_main",
+          "parent_kind": "page",
+          "parent_id": "about",
+          "child_id": "tabs_main",
+          "slot": "main",
+          "position": 1
+        },
+        {
+          "id": "p_tab_design",
+          "parent_kind": "block",
+          "parent_id": "tabs_main",
+          "child_id": "tab_design",
+          "slot": "content",
+          "position": 0
+        },
+        {
+          "id": "p_tab_design_text",
+          "parent_kind": "block",
+          "parent_id": "tab_design",
+          "child_id": "tab_design_text",
+          "slot": "content",
+          "position": 0
+        },
+        {
+          "id": "p_tab_layout",
+          "parent_kind": "block",
+          "parent_id": "tabs_main",
+          "child_id": "tab_layout",
+          "slot": "content",
+          "position": 1
+        },
+        {
+          "id": "p_tab_layout_text",
+          "parent_kind": "block",
+          "parent_id": "tab_layout",
+          "child_id": "tab_layout_text",
+          "slot": "content",
+          "position": 0
+        },
+        {
+          "id": "p_tab_chat",
+          "parent_kind": "block",
+          "parent_id": "tabs_main",
+          "child_id": "tab_chat",
+          "slot": "content",
+          "position": 2
+        },
+        {
+          "id": "p_tab_chat_text",
+          "parent_kind": "block",
+          "parent_id": "tab_chat",
+          "child_id": "tab_chat_text",
+          "slot": "content",
+          "position": 0
+        },
+        {
+          "id": "p_journal_title",
+          "parent_kind": "page",
+          "parent_id": "journal",
+          "child_id": "journal_title",
+          "slot": "main",
+          "position": 0
+        },
+        {
+          "id": "p_journal_list",
+          "parent_kind": "page",
+          "parent_id": "journal",
+          "child_id": "journal_list",
+          "slot": "main",
+          "position": 1
+        },
+        {
+          "id": "p_journal_side_text",
+          "parent_kind": "region",
+          "parent_id": "journal_sidebar",
+          "child_id": "journal_side_text",
+          "slot": "content",
+          "position": 0
+        },
+        {
+          "id": "p_journal_side_link",
+          "parent_kind": "region",
+          "parent_id": "journal_sidebar",
+          "child_id": "journal_side_link",
+          "slot": "content",
+          "position": 1
+        },
+        {
+          "id": "p_hero_discover",
+          "parent_kind": "block",
+          "parent_id": "hero_main",
+          "child_id": "hero_discover",
+          "slot": "actions",
+          "position": 2
+        }
+      ],
+      "items": {
+        "type": "object",
+        "default": {
+          "id": "",
+          "parent_kind": "page",
+          "parent_id": "",
+          "child_id": "",
+          "slot": "main",
+          "position": 0
+        },
+        "properties": [
+          {
+            "key": "id",
+            "label": "Id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "parent_kind",
+            "label": "Parent kind",
+            "type": "select",
+            "default": "page",
+            "options": [
+              {
+                "value": "page",
+                "label": "page"
+              },
+              {
+                "value": "region",
+                "label": "region"
+              },
+              {
+                "value": "block",
+                "label": "block"
+              }
+            ]
+          },
+          {
+            "key": "parent_id",
+            "label": "Parent id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "child_id",
+            "label": "Child id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "slot",
+            "label": "Slot",
+            "type": "select",
+            "default": "main",
+            "options": [
+              {
+                "value": "main",
+                "label": "main"
+              },
+              {
+                "value": "content",
+                "label": "content"
+              },
+              {
+                "value": "start",
+                "label": "start"
+              },
+              {
+                "value": "center",
+                "label": "center"
+              },
+              {
+                "value": "end",
+                "label": "end"
+              },
+              {
+                "value": "media",
+                "label": "media"
+              },
+              {
+                "value": "actions",
+                "label": "actions"
+              }
+            ]
+          },
+          {
+            "key": "position",
+            "label": "Position",
+            "type": "number",
+            "default": 0,
+            "min": 0,
+            "max": 10000
+          }
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 100
+    },
+    {
+      "key": "style_profiles",
+      "label": "Style profiles",
+      "type": "array",
+      "default": [
+        {
+          "id": "header_style",
+          "name": "En-tête",
+          "colors": [
+            {
+              "role": "background",
+              "source": "token",
+              "color": "#ffffff",
+              "token": "background"
+            }
+          ],
+          "font_family": "inherit",
+          "font_size": -1,
+          "font_weight": "inherit",
+          "text_align": "inherit",
+          "padding": -1,
+          "margin_top": -1,
+          "margin_bottom": -1,
+          "gap": 20,
+          "radius": -1,
+          "border_width": -1,
+          "shadow": "inherit",
+          "max_width": -1,
+          "width_percent": -1,
+          "min_height": -1,
+          "direction": "inherit",
+          "justify": "inherit",
+          "align": "inherit",
+          "columns": -1,
+          "min_item_width": -1,
+          "visibility": "inherit",
+          "image_fit": "inherit",
+          "image_ratio": "inherit",
+          "opacity_percent": -1
+        },
+        {
+          "id": "hero_art_style",
+          "name": "Illustration hero",
+          "colors": [
+            {
+              "role": "background",
+              "source": "token",
+              "color": "#a13d30",
+              "token": "primary"
+            },
+            {
+              "role": "text",
+              "source": "custom",
+              "color": "#ffffff",
+              "token": "primary"
+            },
+            {
+              "role": "heading",
+              "source": "custom",
+              "color": "#ffffff",
+              "token": "primary"
+            }
+          ],
+          "font_family": "inherit",
+          "font_size": -1,
+          "font_weight": "inherit",
+          "text_align": "inherit",
+          "padding": 24,
+          "margin_top": -1,
+          "margin_bottom": -1,
+          "gap": -1,
+          "radius": 0,
+          "border_width": -1,
+          "shadow": "inherit",
+          "max_width": -1,
+          "width_percent": -1,
+          "min_height": -1,
+          "direction": "inherit",
+          "justify": "inherit",
+          "align": "inherit",
+          "columns": -1,
+          "min_item_width": -1,
+          "visibility": "inherit",
+          "image_fit": "inherit",
+          "image_ratio": "inherit",
+          "opacity_percent": -1
+        },
+        {
+          "id": "sidebar_style",
+          "name": "Sidebar",
+          "colors": [
+            {
+              "role": "background",
+              "source": "token",
+              "color": "#ffffff",
+              "token": "surface"
+            }
+          ],
+          "font_family": "inherit",
+          "font_size": -1,
+          "font_weight": "inherit",
+          "text_align": "inherit",
+          "padding": 16,
+          "margin_top": -1,
+          "margin_bottom": -1,
+          "gap": -1,
+          "radius": 0,
+          "border_width": -1,
+          "shadow": "inherit",
+          "max_width": -1,
+          "width_percent": -1,
+          "min_height": -1,
+          "direction": "inherit",
+          "justify": "inherit",
+          "align": "inherit",
+          "columns": -1,
+          "min_item_width": -1,
+          "visibility": "inherit",
+          "image_fit": "inherit",
+          "image_ratio": "inherit",
+          "opacity_percent": -1
+        },
+        {
+          "id": "editorial_heading",
+          "name": "Typographie éditoriale",
+          "colors": [],
+          "font_family": "serif",
+          "font_size": -1,
+          "font_weight": "normal",
+          "text_align": "inherit",
+          "padding": -1,
+          "margin_top": -1,
+          "margin_bottom": -1,
+          "gap": -1,
+          "radius": -1,
+          "border_width": -1,
+          "shadow": "inherit",
+          "max_width": -1,
+          "width_percent": -1,
+          "min_height": -1,
+          "direction": "inherit",
+          "justify": "inherit",
+          "align": "inherit",
+          "columns": -1,
+          "min_item_width": -1,
+          "visibility": "inherit",
+          "image_fit": "inherit",
+          "image_ratio": "inherit",
+          "opacity_percent": -1
+        }
+      ],
+      "items": {
+        "type": "object",
+        "default": {
+          "id": "",
+          "name": "",
+          "colors": [],
+          "font_family": "inherit",
+          "font_size": -1,
+          "font_weight": "inherit",
+          "text_align": "inherit",
+          "padding": -1,
+          "margin_top": -1,
+          "margin_bottom": -1,
+          "gap": -1,
+          "radius": -1,
+          "border_width": -1,
+          "shadow": "inherit",
+          "max_width": -1,
+          "width_percent": -1,
+          "min_height": -1,
+          "direction": "inherit",
+          "justify": "inherit",
+          "align": "inherit",
+          "columns": -1,
+          "min_item_width": -1,
+          "visibility": "inherit",
+          "image_fit": "inherit",
+          "image_ratio": "inherit",
+          "opacity_percent": -1
+        },
+        "properties": [
+          {
+            "key": "id",
+            "label": "Id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "name",
+            "label": "Name",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "colors",
+            "label": "Colors",
+            "type": "array",
+            "default": [],
+            "items": {
+              "type": "object",
+              "default": {
+                "role": "background",
+                "source": "custom",
+                "color": "#ffffff",
+                "token": "primary"
+              },
+              "properties": [
+                {
+                  "key": "role",
+                  "label": "Role",
+                  "type": "select",
+                  "default": "background",
+                  "options": [
+                    {
+                      "value": "background",
+                      "label": "background"
+                    },
+                    {
+                      "value": "text",
+                      "label": "text"
+                    },
+                    {
+                      "value": "heading",
+                      "label": "heading"
+                    },
+                    {
+                      "value": "border",
+                      "label": "border"
+                    },
+                    {
+                      "value": "accent",
+                      "label": "accent"
+                    },
+                    {
+                      "value": "link",
+                      "label": "link"
+                    },
+                    {
+                      "value": "button_background",
+                      "label": "button background"
+                    },
+                    {
+                      "value": "button_text",
+                      "label": "button text"
+                    }
+                  ]
+                },
+                {
+                  "key": "source",
+                  "label": "Source",
+                  "type": "select",
+                  "default": "custom",
+                  "options": [
+                    {
+                      "value": "custom",
+                      "label": "custom"
+                    },
+                    {
+                      "value": "token",
+                      "label": "token"
+                    },
+                    {
+                      "value": "transparent",
+                      "label": "transparent"
+                    }
+                  ]
+                },
+                {
+                  "key": "color",
+                  "label": "Color",
+                  "type": "color",
+                  "default": "#ffffff"
+                },
+                {
+                  "key": "token",
+                  "label": "Token",
+                  "type": "select",
+                  "default": "primary",
+                  "options": [
+                    {
+                      "value": "primary",
+                      "label": "primary"
+                    },
+                    {
+                      "value": "secondary",
+                      "label": "secondary"
+                    },
+                    {
+                      "value": "background",
+                      "label": "background"
+                    },
+                    {
+                      "value": "surface",
+                      "label": "surface"
+                    },
+                    {
+                      "value": "text_color",
+                      "label": "text color"
+                    },
+                    {
+                      "value": "muted",
+                      "label": "muted"
+                    },
+                    {
+                      "value": "border_color",
+                      "label": "border color"
+                    },
+                    {
+                      "value": "accent",
+                      "label": "accent"
+                    }
+                  ]
+                }
+              ]
+            },
+            "minItems": 0,
+            "maxItems": 8
+          },
+          {
+            "key": "font_family",
+            "label": "Font family",
+            "type": "select",
+            "default": "inherit",
+            "options": [
+              {
+                "value": "inherit",
+                "label": "inherit"
+              },
+              {
+                "value": "system",
+                "label": "system"
+              },
+              {
+                "value": "serif",
+                "label": "serif"
+              },
+              {
+                "value": "monospace",
+                "label": "monospace"
+              }
+            ]
+          },
+          {
+            "key": "font_size",
+            "label": "Font size",
+            "type": "number",
+            "default": -1,
+            "min": -1,
+            "max": 96
+          },
+          {
+            "key": "font_weight",
+            "label": "Font weight",
+            "type": "select",
+            "default": "inherit",
+            "options": [
+              {
+                "value": "inherit",
+                "label": "inherit"
+              },
+              {
+                "value": "normal",
+                "label": "normal"
+              },
+              {
+                "value": "medium",
+                "label": "medium"
+              },
+              {
+                "value": "semibold",
+                "label": "semibold"
+              },
+              {
+                "value": "bold",
+                "label": "bold"
+              }
+            ]
+          },
+          {
+            "key": "text_align",
+            "label": "Text align",
+            "type": "select",
+            "default": "inherit",
+            "options": [
+              {
+                "value": "inherit",
+                "label": "inherit"
+              },
+              {
+                "value": "start",
+                "label": "start"
+              },
+              {
+                "value": "center",
+                "label": "center"
+              },
+              {
+                "value": "end",
+                "label": "end"
+              },
+              {
+                "value": "justify",
+                "label": "justify"
+              }
+            ]
+          },
+          {
+            "key": "padding",
+            "label": "Padding",
+            "type": "number",
+            "default": -1,
+            "min": -1,
+            "max": 160
+          },
+          {
+            "key": "margin_top",
+            "label": "Margin top",
+            "type": "number",
+            "default": -1,
+            "min": -1,
+            "max": 160
+          },
+          {
+            "key": "margin_bottom",
+            "label": "Margin bottom",
+            "type": "number",
+            "default": -1,
+            "min": -1,
+            "max": 160
+          },
+          {
+            "key": "gap",
+            "label": "Gap",
+            "type": "number",
+            "default": -1,
+            "min": -1,
+            "max": 100
+          },
+          {
+            "key": "radius",
+            "label": "Radius",
+            "type": "number",
+            "default": -1,
+            "min": -1,
+            "max": 100
+          },
+          {
+            "key": "border_width",
+            "label": "Border width",
+            "type": "number",
+            "default": -1,
+            "min": -1,
+            "max": 12
+          },
+          {
+            "key": "shadow",
+            "label": "Shadow",
+            "type": "select",
+            "default": "inherit",
+            "options": [
+              {
+                "value": "inherit",
+                "label": "inherit"
+              },
+              {
+                "value": "none",
+                "label": "none"
+              },
+              {
+                "value": "small",
+                "label": "small"
+              },
+              {
+                "value": "medium",
+                "label": "medium"
+              },
+              {
+                "value": "large",
+                "label": "large"
+              }
+            ]
+          },
+          {
+            "key": "max_width",
+            "label": "Max width",
+            "type": "number",
+            "default": -1,
+            "min": -1,
+            "max": 1920
+          },
+          {
+            "key": "width_percent",
+            "label": "Width percent",
+            "type": "number",
+            "default": -1,
+            "min": -1,
+            "max": 100
+          },
+          {
+            "key": "min_height",
+            "label": "Min height",
+            "type": "number",
+            "default": -1,
+            "min": -1,
+            "max": 1200
+          },
+          {
+            "key": "direction",
+            "label": "Direction",
+            "type": "select",
+            "default": "inherit",
+            "options": [
+              {
+                "value": "inherit",
+                "label": "inherit"
+              },
+              {
+                "value": "row",
+                "label": "row"
+              },
+              {
+                "value": "column",
+                "label": "column"
+              }
+            ]
+          },
+          {
+            "key": "justify",
+            "label": "Justify",
+            "type": "select",
+            "default": "inherit",
+            "options": [
+              {
+                "value": "inherit",
+                "label": "inherit"
+              },
+              {
+                "value": "start",
+                "label": "start"
+              },
+              {
+                "value": "center",
+                "label": "center"
+              },
+              {
+                "value": "end",
+                "label": "end"
+              },
+              {
+                "value": "between",
+                "label": "between"
+              }
+            ]
+          },
+          {
+            "key": "align",
+            "label": "Align",
+            "type": "select",
+            "default": "inherit",
+            "options": [
+              {
+                "value": "inherit",
+                "label": "inherit"
+              },
+              {
+                "value": "start",
+                "label": "start"
+              },
+              {
+                "value": "center",
+                "label": "center"
+              },
+              {
+                "value": "end",
+                "label": "end"
+              },
+              {
+                "value": "stretch",
+                "label": "stretch"
+              }
+            ]
+          },
+          {
+            "key": "columns",
+            "label": "Columns",
+            "type": "number",
+            "default": -1,
+            "min": -1,
+            "max": 12
+          },
+          {
+            "key": "min_item_width",
+            "label": "Min item width",
+            "type": "number",
+            "default": -1,
+            "min": -1,
+            "max": 800
+          },
+          {
+            "key": "visibility",
+            "label": "Visibility",
+            "type": "select",
+            "default": "inherit",
+            "options": [
+              {
+                "value": "inherit",
+                "label": "inherit"
+              },
+              {
+                "value": "visible",
+                "label": "visible"
+              },
+              {
+                "value": "hidden",
+                "label": "hidden"
+              }
+            ]
+          },
+          {
+            "key": "image_fit",
+            "label": "Image fit",
+            "type": "select",
+            "default": "inherit",
+            "options": [
+              {
+                "value": "inherit",
+                "label": "inherit"
+              },
+              {
+                "value": "cover",
+                "label": "cover"
+              },
+              {
+                "value": "contain",
+                "label": "contain"
+              }
+            ]
+          },
+          {
+            "key": "image_ratio",
+            "label": "Image ratio",
+            "type": "select",
+            "default": "inherit",
+            "options": [
+              {
+                "value": "inherit",
+                "label": "inherit"
+              },
+              {
+                "value": "auto",
+                "label": "auto"
+              },
+              {
+                "value": "square",
+                "label": "square"
+              },
+              {
+                "value": "landscape",
+                "label": "landscape"
+              },
+              {
+                "value": "portrait",
+                "label": "portrait"
+              }
+            ]
+          },
+          {
+            "key": "opacity_percent",
+            "label": "Opacity percent",
+            "type": "number",
+            "default": -1,
+            "min": -1,
+            "max": 100
+          }
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 80
+    },
+    {
+      "key": "responsive_styles",
+      "label": "Responsive styles",
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "default": {
+          "style_id": "",
+          "breakpoint": "tablet",
+          "override_style_id": ""
+        },
+        "properties": [
+          {
+            "key": "style_id",
+            "label": "Style id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "breakpoint",
+            "label": "Breakpoint",
+            "type": "select",
+            "default": "tablet",
+            "options": [
+              {
+                "value": "tablet",
+                "label": "tablet"
+              },
+              {
+                "value": "desktop",
+                "label": "desktop"
+              }
+            ]
+          },
+          {
+            "key": "override_style_id",
+            "label": "Override style id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          }
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 100
+    },
+    {
+      "key": "articles",
+      "label": "Articles",
+      "type": "array",
+      "default": [
+        {
+          "id": "intro",
+          "slug": "introduction",
+          "title": "Introduction à Puzzle",
+          "summary": "Comprendre la composition par objets.",
+          "cover_url": "",
+          "category": "Guide",
+          "author": "ONIRTECH",
+          "source": "inline",
+          "markdown_url": "",
+          "markdown_content": "# Bienvenue dans Puzzle\n\nChaque page est composée de régions et de blocs.\n\n## Les trois principes\n\n- Un contenu indépendant du design\n- Des pièces réutilisables\n- Un rendu responsive\n\n**Personnalisez votre site sans réécrire son code.**",
+          "data_contract_id": "",
+          "published": true
+        }
+      ],
+      "items": {
+        "type": "object",
+        "default": {
+          "id": "",
+          "slug": "",
+          "title": "",
+          "summary": "",
+          "cover_url": "",
+          "category": "",
+          "author": "",
+          "source": "inline",
+          "markdown_url": "",
+          "markdown_content": "",
+          "data_contract_id": "",
+          "published": true
+        },
+        "properties": [
+          {
+            "key": "id",
+            "label": "Id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "slug",
+            "label": "Slug",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "type": "string",
+            "default": "",
+            "maxLength": 240
+          },
+          {
+            "key": "summary",
+            "label": "Summary",
+            "type": "string",
+            "default": "",
+            "maxLength": 500
+          },
+          {
+            "key": "cover_url",
+            "label": "Cover url",
+            "type": "image",
+            "default": ""
+          },
+          {
+            "key": "category",
+            "label": "Category",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "author",
+            "label": "Author",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "source",
+            "label": "Source",
+            "type": "select",
+            "default": "inline",
+            "options": [
+              {
+                "value": "inline",
+                "label": "inline"
+              },
+              {
+                "value": "external_link",
+                "label": "external link"
+              },
+              {
+                "value": "host_data",
+                "label": "host data"
+              }
+            ]
+          },
+          {
+            "key": "markdown_url",
+            "label": "Markdown url",
+            "type": "string",
+            "default": "",
+            "maxLength": 2000
+          },
+          {
+            "key": "markdown_content",
+            "label": "Markdown content",
+            "type": "text",
+            "default": "",
+            "maxLength": 2000
+          },
+          {
+            "key": "data_contract_id",
+            "label": "Data contract id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "published",
+            "label": "Published",
+            "type": "boolean",
+            "default": true
+          }
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 40
+    },
+    {
+      "key": "actions",
+      "label": "Actions",
+      "type": "array",
+      "default": [
+        {
+          "id": "go_home",
+          "kind": "navigate_page",
+          "target": "home",
+          "message": ""
+        },
+        {
+          "id": "go_about",
+          "kind": "navigate_page",
+          "target": "about",
+          "message": ""
+        },
+        {
+          "id": "open_assistant",
+          "kind": "open_chat",
+          "target": "chat_main",
+          "message": ""
+        },
+        {
+          "id": "go_journal",
+          "kind": "navigate_page",
+          "target": "journal",
+          "message": ""
+        },
+        {
+          "id": "go_article",
+          "kind": "navigate_article",
+          "target": "intro",
+          "message": ""
+        },
+        {
+          "id": "toggle_theme",
+          "kind": "switch_theme",
+          "target": "",
+          "message": ""
+        },
+        {
+          "id": "go_legal",
+          "kind": "navigate_page",
+          "target": "legal",
+          "message": ""
+        },
+        {
+          "id": "go_about_hero",
+          "kind": "navigate_page",
+          "target": "about",
+          "message": ""
+        }
+      ],
+      "items": {
+        "type": "object",
+        "default": {
+          "id": "",
+          "kind": "navigate_page",
+          "target": "",
+          "message": ""
+        },
+        "properties": [
+          {
+            "key": "id",
+            "label": "Id",
+            "type": "string",
+            "default": "",
+            "maxLength": 120
+          },
+          {
+            "key": "kind",
+            "label": "Kind",
+            "type": "select",
+            "default": "navigate_page",
+            "options": [
+              {
+                "value": "navigate_page",
+                "label": "navigate page"
+              },
+              {
+                "value": "navigate_article",
+                "label": "navigate article"
+              },
+              {
+                "value": "open_url",
+                "label": "open url"
+              },
+              {
+                "value": "scroll_to",
+                "label": "scroll to"
+              },
+              {
+                "value": "open_chat",
+                "label": "open chat"
+              },
+              {
+                "value": "send_message",
+                "label": "send message"
+              },
+              {
+                "value": "switch_tab",
+                "label": "switch tab"
+              },
+              {
+                "value": "toggle_sidebar",
+                "label": "toggle sidebar"
+              },
+              {
+                "value": "switch_theme",
+                "label": "switch theme"
+              },
+              {
+                "value": "open_media",
+                "label": "open media"
+              }
+            ]
+          },
+          {
+            "key": "target",
+            "label": "Target",
+            "type": "string",
+            "default": "",
+            "maxLength": 2000
+          },
+          {
+            "key": "message",
+            "label": "Message",
+            "type": "text",
+            "default": "",
+            "maxLength": 2000
+          }
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 100
+    }
+  ],
+  "editor": {
+    "version": 2,
+    "regions": [
+      {
+        "id": "site",
+        "label": "Réglages du site"
+      },
+      {
+        "id": "chat",
+        "label": "Assistant (configuration globale)"
+      },
+      {
+        "id": "manage_pages",
+        "label": "Pages"
+      },
+      {
+        "id": "manage_regions",
+        "label": "Zones réutilisables"
+      },
+      {
+        "id": "manage_blocks",
+        "label": "Composants"
+      },
+      {
+        "id": "manage_placements",
+        "label": "Placements"
+      },
+      {
+        "id": "manage_style_profiles",
+        "label": "Styles partagés"
+      },
+      {
+        "id": "manage_articles",
+        "label": "Articles"
+      },
+      {
+        "id": "manage_actions",
+        "label": "Actions"
+      }
+    ],
+    "bindings": [
+      {
+        "param": "site_settings",
+        "regions": [
+          "site"
+        ],
+        "category": "content"
+      },
+      {
+        "param": "global_theme",
+        "regions": [
+          "site"
+        ],
+        "category": "appearance"
+      },
+      {
+        "param": "responsive_styles",
+        "regions": [
+          "site"
+        ],
+        "category": "appearance"
+      },
+      {
+        "param": "site_settings.chat_mode",
+        "regions": [
+          "chat"
+        ],
+        "category": "content"
+      },
+      {
+        "param": "site_settings.chat_page_id",
+        "regions": [
+          "chat"
+        ],
+        "category": "content"
+      },
+      {
+        "param": "pages",
+        "regions": [
+          "page:{id}"
+        ],
+        "category": "content",
+        "itemKey": "id"
+      },
+      {
+        "param": "pages",
+        "regions": [
+          "manage_pages"
+        ],
+        "category": "content"
+      },
+      {
+        "param": "pages",
+        "regions": [
+          "page:home"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "home"
+      },
+      {
+        "param": "pages",
+        "regions": [
+          "page:about"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "about"
+      },
+      {
+        "param": "pages",
+        "regions": [
+          "page:journal"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "journal"
+      },
+      {
+        "param": "pages",
+        "regions": [
+          "page:legal"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "legal"
+      },
+      {
+        "param": "regions",
+        "regions": [
+          "region:{id}"
+        ],
+        "category": "content",
+        "itemKey": "id"
+      },
+      {
+        "param": "regions",
+        "regions": [
+          "manage_regions"
+        ],
+        "category": "content"
+      },
+      {
+        "param": "regions",
+        "regions": [
+          "region:header_main"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "header_main"
+      },
+      {
+        "param": "regions",
+        "regions": [
+          "region:footer_main"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "footer_main"
+      },
+      {
+        "param": "regions",
+        "regions": [
+          "region:journal_sidebar"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "journal_sidebar"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:{id}"
+        ],
+        "category": "content",
+        "itemKey": "id"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "manage_blocks"
+        ],
+        "category": "content"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:brand_logo"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "brand_logo"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:nav_main"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "nav_main"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:nav_home"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "nav_home"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:nav_about"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "nav_about"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:hero_main"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "hero_main"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:hero_button"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "hero_button"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:services"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "services"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:card_one"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "card_one"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:card_two"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "card_two"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:card_three"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "card_three"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:chat_main"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "chat_main"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:about_text"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "about_text"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:footer_text"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "footer_text"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:nav_journal"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "nav_journal"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:theme_btn"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "theme_btn"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:legal_link"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "legal_link"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:legal_text"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "legal_text"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:hero_art"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "hero_art"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:section_title"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "section_title"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:tabs_main"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "tabs_main"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:tab_design"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "tab_design"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:tab_design_text"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "tab_design_text"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:tab_layout"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "tab_layout"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:tab_layout_text"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "tab_layout_text"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:tab_chat"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "tab_chat"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:tab_chat_text"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "tab_chat_text"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:journal_title"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "journal_title"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:journal_list"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "journal_list"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:journal_side_text"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "journal_side_text"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:journal_side_link"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "journal_side_link"
+      },
+      {
+        "param": "blocks",
+        "regions": [
+          "block:hero_discover"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "hero_discover"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:{id}"
+        ],
+        "category": "content",
+        "itemKey": "id"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "manage_placements"
+        ],
+        "category": "content"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:placement_00"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "placement_00"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:placement_01"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "placement_01"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:placement_02"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "placement_02"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:placement_03"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "placement_03"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:placement_04"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "placement_04"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:placement_05"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "placement_05"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:placement_06"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "placement_06"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:placement_07"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "placement_07"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:placement_08"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "placement_08"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:placement_09"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "placement_09"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:placement_10"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "placement_10"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:placement_11"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "placement_11"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:placement_12"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "placement_12"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:p_nav_journal"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "p_nav_journal"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:p_theme_btn"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "p_theme_btn"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:p_legal_link"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "p_legal_link"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:p_legal_text"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "p_legal_text"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:p_hero_art"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "p_hero_art"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:p_section_title"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "p_section_title"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:p_tabs_main"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "p_tabs_main"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:p_tab_design"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "p_tab_design"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:p_tab_design_text"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "p_tab_design_text"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:p_tab_layout"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "p_tab_layout"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:p_tab_layout_text"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "p_tab_layout_text"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:p_tab_chat"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "p_tab_chat"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:p_tab_chat_text"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "p_tab_chat_text"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:p_journal_title"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "p_journal_title"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:p_journal_list"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "p_journal_list"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:p_journal_side_text"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "p_journal_side_text"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:p_journal_side_link"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "p_journal_side_link"
+      },
+      {
+        "param": "placements",
+        "regions": [
+          "placement:p_hero_discover"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "p_hero_discover"
+      },
+      {
+        "param": "style_profiles",
+        "regions": [
+          "style:{id}"
+        ],
+        "category": "appearance",
+        "itemKey": "id"
+      },
+      {
+        "param": "style_profiles",
+        "regions": [
+          "manage_style_profiles"
+        ],
+        "category": "appearance"
+      },
+      {
+        "param": "style_profiles",
+        "regions": [
+          "style:header_style"
+        ],
+        "category": "appearance",
+        "itemKey": "id",
+        "itemId": "header_style"
+      },
+      {
+        "param": "style_profiles",
+        "regions": [
+          "style:hero_art_style"
+        ],
+        "category": "appearance",
+        "itemKey": "id",
+        "itemId": "hero_art_style"
+      },
+      {
+        "param": "style_profiles",
+        "regions": [
+          "style:sidebar_style"
+        ],
+        "category": "appearance",
+        "itemKey": "id",
+        "itemId": "sidebar_style"
+      },
+      {
+        "param": "style_profiles",
+        "regions": [
+          "style:editorial_heading"
+        ],
+        "category": "appearance",
+        "itemKey": "id",
+        "itemId": "editorial_heading"
+      },
+      {
+        "param": "articles",
+        "regions": [
+          "article:{id}"
+        ],
+        "category": "content",
+        "itemKey": "id"
+      },
+      {
+        "param": "articles",
+        "regions": [
+          "manage_articles"
+        ],
+        "category": "content"
+      },
+      {
+        "param": "articles",
+        "regions": [
+          "article:intro"
+        ],
+        "category": "content",
+        "itemKey": "id",
+        "itemId": "intro"
+      },
+      {
+        "param": "actions",
+        "regions": [
+          "action:{id}"
+        ],
+        "category": "action",
+        "itemKey": "id"
+      },
+      {
+        "param": "actions",
+        "regions": [
+          "manage_actions"
+        ],
+        "category": "action"
+      },
+      {
+        "param": "actions",
+        "regions": [
+          "action:go_home"
+        ],
+        "category": "action",
+        "itemKey": "id",
+        "itemId": "go_home"
+      },
+      {
+        "param": "actions",
+        "regions": [
+          "action:go_about"
+        ],
+        "category": "action",
+        "itemKey": "id",
+        "itemId": "go_about"
+      },
+      {
+        "param": "actions",
+        "regions": [
+          "action:open_assistant"
+        ],
+        "category": "action",
+        "itemKey": "id",
+        "itemId": "open_assistant"
+      },
+      {
+        "param": "actions",
+        "regions": [
+          "action:go_journal"
+        ],
+        "category": "action",
+        "itemKey": "id",
+        "itemId": "go_journal"
+      },
+      {
+        "param": "actions",
+        "regions": [
+          "action:go_article"
+        ],
+        "category": "action",
+        "itemKey": "id",
+        "itemId": "go_article"
+      },
+      {
+        "param": "actions",
+        "regions": [
+          "action:toggle_theme"
+        ],
+        "category": "action",
+        "itemKey": "id",
+        "itemId": "toggle_theme"
+      },
+      {
+        "param": "actions",
+        "regions": [
+          "action:go_legal"
+        ],
+        "category": "action",
+        "itemKey": "id",
+        "itemId": "go_legal"
+      },
+      {
+        "param": "actions",
+        "regions": [
+          "action:go_about_hero"
+        ],
+        "category": "action",
+        "itemKey": "id",
+        "itemId": "go_about_hero"
+      }
+    ],
+    "collections": [
+      {
+        "param": "pages",
+        "label": "Pages",
+        "itemKey": "id",
+        "itemLabel": "title",
+        "labelFallback": [
+          "slug",
+          "id"
+        ]
+      },
+      {
+        "param": "regions",
+        "label": "Zones réutilisables",
+        "itemKey": "id",
+        "itemLabel": "name",
+        "itemKind": "kind",
+        "labelFallback": [
+          "id"
+        ]
+      },
+      {
+        "param": "blocks",
+        "label": "Composants",
+        "itemKey": "id",
+        "itemLabel": "title",
+        "itemKind": "kind",
+        "labelFallback": [
+          "name",
+          "kind",
+          "id"
+        ]
+      },
+      {
+        "param": "placements",
+        "label": "Placements",
+        "itemKey": "id",
+        "itemLabel": "child_id",
+        "itemKind": "parent_kind",
+        "labelFallback": [
+          "id"
+        ]
+      },
+      {
+        "param": "style_profiles",
+        "label": "Styles partagés",
+        "itemKey": "id",
+        "itemLabel": "name",
+        "labelFallback": [
+          "id"
+        ]
+      },
+      {
+        "param": "articles",
+        "label": "Articles",
+        "itemKey": "id",
+        "itemLabel": "title",
+        "labelFallback": [
+          "slug",
+          "id"
+        ]
+      },
+      {
+        "param": "actions",
+        "label": "Actions",
+        "itemKey": "id",
+        "itemLabel": "kind",
+        "itemKind": "kind",
+        "labelFallback": [
+          "id"
+        ]
+      }
+    ],
+    "dynamicRegions": [
+      {
+        "idPattern": "page:{id}",
+        "collection": "pages",
+        "keyField": "id"
+      },
+      {
+        "idPattern": "region:{id}",
+        "collection": "regions",
+        "keyField": "id"
+      },
+      {
+        "idPattern": "block:{id}",
+        "collection": "blocks",
+        "keyField": "id"
+      },
+      {
+        "idPattern": "placement:{id}",
+        "collection": "placements",
+        "keyField": "id"
+      },
+      {
+        "idPattern": "style:{id}",
+        "collection": "style_profiles",
+        "keyField": "id"
+      },
+      {
+        "idPattern": "article:{id}",
+        "collection": "articles",
+        "keyField": "id"
+      },
+      {
+        "idPattern": "action:{id}",
+        "collection": "actions",
+        "keyField": "id"
+      }
+    ],
+    "fields": [
+      {
+        "param": "blocks",
+        "field": "title",
+        "visibleWhen": {
+          "field": "kind",
+          "in": [
+            "section",
+            "stack",
+            "grid",
+            "columns",
+            "column",
+            "hero",
+            "heading",
+            "text",
+            "icon",
+            "card",
+            "button",
+            "link",
+            "logo",
+            "menu",
+            "menu_item",
+            "social_links",
+            "tabs",
+            "tab",
+            "accordion",
+            "accordion_item",
+            "badge",
+            "article_list",
+            "chat",
+            "chat_trigger",
+            "media_gallery",
+            "quote",
+            "video_link",
+            "table",
+            "list_item",
+            "statistic"
+          ]
+        }
+      },
+      {
+        "param": "blocks",
+        "field": "subtitle",
+        "visibleWhen": {
+          "field": "kind",
+          "in": [
+            "section",
+            "stack",
+            "grid",
+            "columns",
+            "column",
+            "hero",
+            "heading",
+            "text",
+            "card",
+            "tabs",
+            "accordion",
+            "article_list",
+            "media_gallery",
+            "quote",
+            "table",
+            "statistic"
+          ]
+        }
+      },
+      {
+        "param": "blocks",
+        "field": "text",
+        "visibleWhen": {
+          "field": "kind",
+          "in": [
+            "section",
+            "stack",
+            "grid",
+            "columns",
+            "column",
+            "hero",
+            "heading",
+            "text",
+            "image",
+            "card",
+            "button",
+            "link",
+            "menu_item",
+            "tab",
+            "accordion_item",
+            "badge",
+            "chat",
+            "chat_trigger",
+            "quote",
+            "video_link",
+            "list_item",
+            "statistic"
+          ]
+        }
+      },
+      {
+        "param": "blocks",
+        "field": "text_format",
+        "visibleWhen": {
+          "field": "kind",
+          "in": [
+            "section",
+            "stack",
+            "grid",
+            "columns",
+            "column",
+            "hero",
+            "heading",
+            "text",
+            "card",
+            "tab",
+            "accordion_item",
+            "list_item",
+            "statistic"
+          ]
+        }
+      },
+      {
+        "param": "blocks",
+        "field": "image_url",
+        "visibleWhen": {
+          "field": "kind",
+          "in": [
+            "hero",
+            "card",
+            "image",
+            "logo",
+            "video_link"
+          ]
+        }
+      },
+      {
+        "param": "blocks",
+        "field": "alt_text",
+        "visibleWhen": {
+          "field": "kind",
+          "in": [
+            "hero",
+            "card",
+            "image",
+            "logo",
+            "video_link",
+            "icon"
+          ]
+        }
+      },
+      {
+        "param": "blocks",
+        "field": "icon_name",
+        "visibleWhen": {
+          "field": "kind",
+          "equals": "icon"
+        }
+      },
+      {
+        "param": "blocks",
+        "field": "article_id",
+        "visibleWhen": {
+          "field": "kind",
+          "equals": "article"
+        }
+      },
+      {
+        "param": "blocks",
+        "field": "category",
+        "visibleWhen": {
+          "field": "kind",
+          "equals": "article_list"
+        }
+      },
+      {
+        "param": "blocks",
+        "field": "media_id",
+        "visibleWhen": {
+          "field": "kind",
+          "equals": "media_gallery"
+        }
+      },
+      {
+        "param": "blocks",
+        "field": "columns",
+        "visibleWhen": {
+          "field": "kind",
+          "in": [
+            "grid",
+            "columns",
+            "article_list",
+            "media_gallery"
+          ]
+        }
+      },
+      {
+        "param": "blocks",
+        "field": "min_item_width",
+        "visibleWhen": {
+          "field": "kind",
+          "in": [
+            "grid",
+            "columns",
+            "article_list",
+            "media_gallery"
+          ]
+        }
+      },
+      {
+        "param": "blocks",
+        "field": "value",
+        "visibleWhen": {
+          "field": "kind",
+          "in": [
+            "button",
+            "link",
+            "menu_item",
+            "accordion_item",
+            "badge",
+            "chat_trigger",
+            "video_link",
+            "list_item",
+            "statistic"
+          ]
+        }
+      },
+      {
+        "param": "blocks",
+        "field": "action_id",
+        "visibleWhen": {
+          "field": "kind",
+          "in": [
+            "hero",
+            "card",
+            "button",
+            "link",
+            "logo",
+            "menu_item",
+            "chat_trigger",
+            "video_link"
+          ]
+        }
+      },
+      {
+        "param": "blocks",
+        "field": "variant",
+        "visibleWhen": {
+          "field": "kind",
+          "in": [
+            "hero",
+            "card",
+            "heading",
+            "image",
+            "button",
+            "chat_trigger",
+            "list",
+            "statistic"
+          ]
+        }
+      },
+      {
+        "param": "site_settings",
+        "field": "chat_page_id",
+        "visibleWhen": {
+          "field": "chat_mode",
+          "equals": "embedded"
+        }
+      },
+      {
+        "param": "articles",
+        "field": "markdown_content",
+        "visibleWhen": {
+          "field": "source",
+          "equals": "inline"
+        }
+      },
+      {
+        "param": "articles",
+        "field": "markdown_url",
+        "visibleWhen": {
+          "field": "source",
+          "in": [
+            "external_link",
+            "host_data"
+          ]
+        }
+      },
+      {
+        "param": "articles",
+        "field": "data_contract_id",
+        "visibleWhen": {
+          "field": "source",
+          "equals": "host_data"
+        }
+      },
+      {
+        "param": "actions",
+        "field": "message",
+        "visibleWhen": {
+          "field": "kind",
+          "equals": "send_message"
+        }
+      },
+      {
+        "param": "actions",
+        "field": "target",
+        "visibleWhen": {
+          "field": "kind",
+          "in": [
+            "navigate_page",
+            "navigate_article",
+            "open_url",
+            "open_media",
+            "scroll_to",
+            "switch_tab",
+            "toggle_sidebar"
+          ]
+        }
+      }
+    ],
+    "groups": [
+      {
+        "param": "site_settings",
+        "id": "identity",
+        "label": "Identité et navigation",
+        "fields": [
+          "site_name",
+          "home_page_id",
+          "theme_mode"
+        ],
+        "collapsedByDefault": false
+      },
+      {
+        "param": "site_settings",
+        "id": "conversation",
+        "label": "Conversation",
+        "fields": [
+          "chat_mode",
+          "chat_page_id",
+          "public_browsing"
+        ],
+        "collapsedByDefault": false
+      },
+      {
+        "param": "site_settings",
+        "id": "advanced",
+        "label": "Avancé",
+        "fields": [
+          "config_version"
+        ],
+        "collapsedByDefault": true
+      },
+      {
+        "param": "global_theme",
+        "id": "colors",
+        "label": "Couleurs — mode clair",
+        "fields": [
+          "primary",
+          "secondary",
+          "accent",
+          "background",
+          "surface",
+          "text_color",
+          "muted",
+          "border_color"
+        ],
+        "collapsedByDefault": false
+      },
+      {
+        "param": "global_theme",
+        "id": "dark_colors",
+        "label": "Couleurs — mode sombre",
+        "fields": [
+          "dark_background",
+          "dark_surface",
+          "dark_text",
+          "dark_muted",
+          "dark_border"
+        ],
+        "collapsedByDefault": true
+      },
+      {
+        "param": "global_theme",
+        "id": "typography",
+        "label": "Typographie",
+        "fields": [
+          "font_family",
+          "base_font_size"
+        ],
+        "collapsedByDefault": false
+      },
+      {
+        "param": "global_theme",
+        "id": "layout",
+        "label": "Dimensions et espacements",
+        "fields": [
+          "max_width",
+          "base_gap",
+          "base_radius"
+        ],
+        "collapsedByDefault": true
+      },
+      {
+        "param": "pages",
+        "id": "content",
+        "label": "Page",
+        "fields": [
+          "title",
+          "slug",
+          "description",
+          "published"
+        ],
+        "collapsedByDefault": false
+      },
+      {
+        "param": "pages",
+        "id": "regions",
+        "label": "Zones de la page",
+        "fields": [
+          "header_id",
+          "left_sidebar_id",
+          "right_sidebar_id",
+          "footer_id"
+        ],
+        "collapsedByDefault": false
+      },
+      {
+        "param": "pages",
+        "id": "appearance",
+        "label": "Apparence",
+        "fields": [
+          "layout",
+          "style_id"
+        ],
+        "collapsedByDefault": false
+      },
+      {
+        "param": "pages",
+        "id": "advanced",
+        "label": "Avancé",
+        "fields": [
+          "id"
+        ],
+        "collapsedByDefault": true
+      },
+      {
+        "param": "regions",
+        "id": "content",
+        "label": "Zone",
+        "fields": [
+          "name",
+          "kind"
+        ],
+        "collapsedByDefault": false
+      },
+      {
+        "param": "regions",
+        "id": "appearance",
+        "label": "Apparence",
+        "fields": [
+          "variant",
+          "style_id",
+          "sticky",
+          "mobile_mode"
+        ],
+        "collapsedByDefault": false
+      },
+      {
+        "param": "regions",
+        "id": "advanced",
+        "label": "Avancé",
+        "fields": [
+          "id"
+        ],
+        "collapsedByDefault": true
+      },
+      {
+        "param": "blocks",
+        "id": "content",
+        "label": "Contenu",
+        "fields": [
+          "name",
+          "title",
+          "subtitle",
+          "text",
+          "text_format",
+          "value",
+          "image_url",
+          "alt_text",
+          "icon_name",
+          "article_id",
+          "category",
+          "media_id"
+        ],
+        "collapsedByDefault": false
+      },
+      {
+        "param": "blocks",
+        "id": "appearance",
+        "label": "Apparence et disposition",
+        "fields": [
+          "variant",
+          "style_id",
+          "columns",
+          "min_item_width"
+        ],
+        "collapsedByDefault": false
+      },
+      {
+        "param": "blocks",
+        "id": "interaction",
+        "label": "Interaction",
+        "fields": [
+          "action_id"
+        ],
+        "collapsedByDefault": false
+      },
+      {
+        "param": "blocks",
+        "id": "advanced",
+        "label": "Avancé",
+        "fields": [
+          "id",
+          "kind",
+          "visible",
+          "anchor"
+        ],
+        "collapsedByDefault": true
+      },
+      {
+        "param": "placements",
+        "id": "structure",
+        "label": "Position",
+        "fields": [
+          "parent_kind",
+          "parent_id",
+          "child_id",
+          "slot",
+          "position"
+        ],
+        "collapsedByDefault": false
+      },
+      {
+        "param": "placements",
+        "id": "advanced",
+        "label": "Avancé",
+        "fields": [
+          "id"
+        ],
+        "collapsedByDefault": true
+      },
+      {
+        "param": "style_profiles",
+        "id": "identity",
+        "label": "Profil",
+        "fields": [
+          "name"
+        ],
+        "collapsedByDefault": false
+      },
+      {
+        "param": "style_profiles",
+        "id": "colors",
+        "label": "Couleurs",
+        "fields": [
+          "colors"
+        ],
+        "collapsedByDefault": false
+      },
+      {
+        "param": "style_profiles",
+        "id": "typography",
+        "label": "Typographie",
+        "fields": [
+          "font_family",
+          "font_size",
+          "font_weight",
+          "text_align"
+        ],
+        "collapsedByDefault": true
+      },
+      {
+        "param": "style_profiles",
+        "id": "spacing",
+        "label": "Espacements",
+        "fields": [
+          "padding",
+          "margin_top",
+          "margin_bottom",
+          "gap"
+        ],
+        "collapsedByDefault": true
+      },
+      {
+        "param": "style_profiles",
+        "id": "dimensions",
+        "label": "Dimensions",
+        "fields": [
+          "max_width",
+          "width_percent",
+          "min_height"
+        ],
+        "collapsedByDefault": true
+      },
+      {
+        "param": "style_profiles",
+        "id": "layout",
+        "label": "Disposition",
+        "fields": [
+          "direction",
+          "justify",
+          "align",
+          "columns",
+          "min_item_width"
+        ],
+        "collapsedByDefault": true
+      },
+      {
+        "param": "style_profiles",
+        "id": "borders",
+        "label": "Bordures et effets",
+        "fields": [
+          "radius",
+          "border_width",
+          "shadow",
+          "opacity_percent"
+        ],
+        "collapsedByDefault": true
+      },
+      {
+        "param": "style_profiles",
+        "id": "media",
+        "label": "Images",
+        "fields": [
+          "image_fit",
+          "image_ratio"
+        ],
+        "collapsedByDefault": true
+      },
+      {
+        "param": "style_profiles",
+        "id": "advanced",
+        "label": "Avancé",
+        "fields": [
+          "id",
+          "visibility"
+        ],
+        "collapsedByDefault": true
+      },
+      {
+        "param": "articles",
+        "id": "content",
+        "label": "Article",
+        "fields": [
+          "title",
+          "slug",
+          "summary",
+          "cover_url",
+          "category",
+          "author",
+          "published"
+        ],
+        "collapsedByDefault": false
+      },
+      {
+        "param": "articles",
+        "id": "source",
+        "label": "Source du contenu",
+        "fields": [
+          "source",
+          "markdown_content",
+          "markdown_url",
+          "data_contract_id"
+        ],
+        "collapsedByDefault": false
+      },
+      {
+        "param": "articles",
+        "id": "advanced",
+        "label": "Avancé",
+        "fields": [
+          "id"
+        ],
+        "collapsedByDefault": true
+      },
+      {
+        "param": "actions",
+        "id": "content",
+        "label": "Action",
+        "fields": [
+          "kind",
+          "target",
+          "message"
+        ],
+        "collapsedByDefault": false
+      },
+      {
+        "param": "actions",
+        "id": "advanced",
+        "label": "Avancé",
+        "fields": [
+          "id"
+        ],
+        "collapsedByDefault": true
+      }
+    ],
+    "valueLabels": {
+      "site_settings": {
+        "home_page_id": {
+          "": "Non défini"
+        },
+        "chat_page_id": {
+          "": "Non défini"
+        }
+      },
+      "pages": {
+        "header_id": {
+          "": "Non défini"
+        },
+        "footer_id": {
+          "": "Non défini"
+        },
+        "left_sidebar_id": {
+          "": "Non défini"
+        },
+        "right_sidebar_id": {
+          "": "Non défini"
+        },
+        "style_id": {
+          "": "Non défini"
+        }
+      },
+      "regions": {
+        "style_id": {
+          "": "Non défini"
+        }
+      },
+      "blocks": {
+        "style_id": {
+          "": "Non défini"
+        },
+        "action_id": {
+          "": "Non défini"
+        },
+        "article_id": {
+          "": "Non défini"
+        },
+        "media_id": {
+          "": "Non défini"
+        },
+        "columns": {
+          "-1": "Automatique / hériter"
+        },
+        "min_item_width": {
+          "-1": "Automatique / hériter"
+        }
+      },
+      "style_profiles": {
+        "font_family": {
+          "inherit": "Hériter du thème"
+        },
+        "font_size": {
+          "-1": "Automatique / hériter"
+        },
+        "font_weight": {
+          "inherit": "Hériter du thème"
+        },
+        "text_align": {
+          "inherit": "Hériter du thème"
+        },
+        "padding": {
+          "-1": "Automatique / hériter"
+        },
+        "margin_top": {
+          "-1": "Automatique / hériter"
+        },
+        "margin_bottom": {
+          "-1": "Automatique / hériter"
+        },
+        "gap": {
+          "-1": "Automatique / hériter"
+        },
+        "radius": {
+          "-1": "Automatique / hériter"
+        },
+        "border_width": {
+          "-1": "Automatique / hériter"
+        },
+        "shadow": {
+          "inherit": "Hériter du thème"
+        },
+        "max_width": {
+          "-1": "Automatique / hériter"
+        },
+        "width_percent": {
+          "-1": "Automatique / hériter"
+        },
+        "min_height": {
+          "-1": "Automatique / hériter"
+        },
+        "direction": {
+          "inherit": "Hériter du thème"
+        },
+        "justify": {
+          "inherit": "Hériter du thème"
+        },
+        "align": {
+          "inherit": "Hériter du thème"
+        },
+        "columns": {
+          "-1": "Automatique / hériter"
+        },
+        "min_item_width": {
+          "-1": "Automatique / hériter"
+        },
+        "visibility": {
+          "inherit": "Hériter du thème"
+        },
+        "image_fit": {
+          "inherit": "Hériter du thème"
+        },
+        "image_ratio": {
+          "inherit": "Hériter du thème"
+        },
+        "opacity_percent": {
+          "-1": "Automatique / hériter"
+        }
+      },
+      "articles": {
+        "data_contract_id": {
+          "": "Non défini"
+        }
+      }
+    },
+    "references": [
+      {
+        "from": "pages",
+        "field": "header_id",
+        "to": "regions",
+        "targetKey": "id",
+        "optional": true,
+        "onDelete": "clear"
+      },
+      {
+        "from": "pages",
+        "field": "footer_id",
+        "to": "regions",
+        "targetKey": "id",
+        "optional": true,
+        "onDelete": "clear"
+      },
+      {
+        "from": "pages",
+        "field": "left_sidebar_id",
+        "to": "regions",
+        "targetKey": "id",
+        "optional": true,
+        "onDelete": "clear"
+      },
+      {
+        "from": "pages",
+        "field": "right_sidebar_id",
+        "to": "regions",
+        "targetKey": "id",
+        "optional": true,
+        "onDelete": "clear"
+      },
+      {
+        "from": "pages",
+        "field": "style_id",
+        "to": "style_profiles",
+        "targetKey": "id",
+        "optional": true,
+        "onDelete": "clear"
+      },
+      {
+        "from": "regions",
+        "field": "style_id",
+        "to": "style_profiles",
+        "targetKey": "id",
+        "optional": true,
+        "onDelete": "clear"
+      },
+      {
+        "from": "blocks",
+        "field": "style_id",
+        "to": "style_profiles",
+        "targetKey": "id",
+        "optional": true,
+        "onDelete": "clear"
+      },
+      {
+        "from": "blocks",
+        "field": "action_id",
+        "to": "actions",
+        "targetKey": "id",
+        "optional": true,
+        "onDelete": "clear"
+      },
+      {
+        "from": "blocks",
+        "field": "article_id",
+        "to": "articles",
+        "targetKey": "id",
+        "optional": true,
+        "onDelete": "clear"
+      },
+      {
+        "from": "placements",
+        "field": "child_id",
+        "to": "blocks",
+        "targetKey": "id",
+        "optional": false,
+        "onDelete": "cascade"
+      },
+      {
+        "from": "placements",
+        "field": "parent_id",
+        "targets": {
+          "page": "pages",
+          "region": "regions",
+          "block": "blocks"
+        },
+        "discriminator": "parent_kind",
+        "targetKey": "id",
+        "optional": false,
+        "onDelete": "cascade"
+      },
+      {
+        "from": "actions",
+        "field": "target",
+        "targets": {
+          "navigate_page": "pages",
+          "navigate_article": "articles",
+          "open_chat": "blocks",
+          "scroll_to": "blocks",
+          "switch_tab": "blocks"
+        },
+        "discriminator": "kind",
+        "targetKey": "id",
+        "optional": true,
+        "onDelete": "clear"
+      }
+    ],
+    "structure": {
+      "roots": "pages",
+      "regions": {
+        "collection": "regions",
+        "fields": [
+          "header_id",
+          "left_sidebar_id",
+          "right_sidebar_id",
+          "footer_id"
+        ]
+      },
+      "children": {
+        "collection": "blocks",
+        "through": "placements",
+        "parentKey": "parent_id",
+        "parentKindKey": "parent_kind",
+        "childKey": "child_id",
+        "orderKey": "position",
+        "slotKey": "slot"
+      }
+    },
+    "scopes": [
+      {
+        "param": "site_settings",
+        "scope": "global"
+      },
+      {
+        "param": "global_theme",
+        "scope": "global"
+      },
+      {
+        "param": "pages",
+        "scope": "page"
+      },
+      {
+        "param": "regions",
+        "scope": "shared"
+      },
+      {
+        "param": "blocks",
+        "scope": "local"
+      },
+      {
+        "param": "placements",
+        "scope": "local"
+      },
+      {
+        "param": "style_profiles",
+        "scope": "shared"
+      },
+      {
+        "param": "responsive_styles",
+        "scope": "global"
+      },
+      {
+        "param": "articles",
+        "scope": "shared"
+      },
+      {
+        "param": "actions",
+        "scope": "shared"
+      }
+    ],
+    "insertion": [
+      {
+        "parentKind": "menu",
+        "childCollection": "blocks",
+        "allowedKinds": [
+          "menu_item",
+          "link",
+          "button"
+        ],
+        "slot": "content",
+        "defaults": {
+          "menu_item": {
+            "title": "Nouvelle entrée"
+          },
+          "link": {
+            "title": "Nouveau lien"
+          },
+          "button": {
+            "title": "Nouveau bouton"
+          }
+        }
+      },
+      {
+        "parentKind": "tabs",
+        "childCollection": "blocks",
+        "allowedKinds": [
+          "tab"
+        ],
+        "slot": "content",
+        "defaults": {
+          "tab": {
+            "title": "Nouvel onglet"
+          }
+        }
+      },
+      {
+        "parentKind": "accordion",
+        "childCollection": "blocks",
+        "allowedKinds": [
+          "accordion_item"
+        ],
+        "slot": "content",
+        "defaults": {
+          "accordion_item": {
+            "title": "Nouvel élément"
+          }
+        }
+      },
+      {
+        "parentKind": "social_links",
+        "childCollection": "blocks",
+        "allowedKinds": [
+          "link",
+          "button"
+        ],
+        "slot": "content",
+        "defaults": {
+          "link": {
+            "title": "Nouveau lien"
+          },
+          "button": {
+            "title": "Nouveau bouton"
+          }
+        }
+      },
+      {
+        "parentKind": "grid",
+        "childCollection": "blocks",
+        "allowedKinds": [
+          "card"
+        ],
+        "slot": "content",
+        "defaults": {
+          "card": {
+            "title": "Nouvelle carte"
+          }
+        }
+      }
+    ]
+  }
+}
