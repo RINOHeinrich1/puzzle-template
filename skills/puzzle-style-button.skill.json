@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "format": "onirtech.ai-skill.v1",
+  "id": "puzzle-style-button",
+  "title": "Style des boutons",
+  "description": "Modifier le fond, le texte ou le style d’un bouton sans casser un style partagé.",
+  "version": "1.0.0",
+  "priority": 25,
+  "always": false,
+  "intents": [
+    {
+      "id": "change-button-background",
+      "description": "Changer le fond ou la couleur d’un bouton",
+      "examples": [
+        "change le fond du bouton discuter",
+        "mets le bouton Nous contacter en marron",
+        "change la couleur du bouton principal"
+      ]
+    },
+    {
+      "id": "change-button-style",
+      "description": "Modifier le style visuel d’un bouton",
+      "examples": [
+        "arrondis le bouton",
+        "change le style du bouton"
+      ]
+    }
+  ],
+  "instructions": [
+    "Cibler le bouton réel, pas son conteneur.",
+    "Créer une copie locale de style_profiles.",
+    "Utiliser insert avec bindTo vers le champ style_id du bouton.",
+    "Ne jamais modifier directement un style partagé.",
+    "Ne jamais fournir d’identifiant : utiliser bindTo et les identifiants générés par l’hôte."
+  ],
+  "context": {
+    "include": ["references", "scopes"],
+    "maxCandidates": 8
+  },
+  "operations": {
+    "allowed": ["insert", "set"],
+    "constraints": [
+      "créer une copie locale si le style est partagé",
+      "le champ de référence doit être style_id",
+      "ne pas modifier le style partagé"
+    ]
+  },
+  "examples": [
+    {
+      "request": "change le fond du bouton discuter en marron",
+      "notes": "Créer un style local et le rattacher au bouton."
+    }
+  ]
+}

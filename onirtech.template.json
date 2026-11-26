@@ -4,7 +4,7 @@
   "id": "puzzle",
   "name": "Puzzle",
   "description": "Moteur de composition de pages et de conversation personnalisables.",
-  "version": "1.1.0-beta.3",
+  "version": "1.1.0-beta.4",
   "publisher": {
     "id": "onirtech",
     "name": "ONIRTECH",
@@ -5111,5 +5111,25 @@
         }
       }
     ]
-  }
+  },
+  "aiSkills": [
+    {
+      "id": "puzzle-content-edit",
+      "format": "onirtech.ai-skill.v1",
+      "path": "skills/puzzle-content-edit.skill.json",
+      "integrity": "sha256-qe1Sp/sSvf2AtOR9f4uphFGIuk7595Vs/cY0kalhlsA="
+    },
+    {
+      "id": "puzzle-page-menu",
+      "format": "onirtech.ai-skill.v1",
+      "path": "skills/puzzle-page-menu.skill.json",
+      "integrity": "sha256-+yX2XUAbeeaT6px/r5lzgTwkF2u3xMOdAHhvg54/Ib8="
+    },
+    {
+      "id": "puzzle-style-button",
+      "format": "onirtech.ai-skill.v1",
+      "path": "skills/puzzle-style-button.skill.json",
+      "integrity": "sha256-S8RLTqbuX9Y7HGQjs4pyf+i3Xix5bVpF30frVYpIVEU="
+    }
+  ]
 }

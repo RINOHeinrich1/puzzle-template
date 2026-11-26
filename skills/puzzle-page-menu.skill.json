@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "format": "onirtech.ai-skill.v1",
+  "id": "puzzle-page-menu",
+  "title": "Créer une page et son entrée de menu",
+  "description": "Compose une nouvelle page et son entrée de menu dans Puzzle.",
+  "version": "1.0.0",
+  "priority": 20,
+  "always": false,
+  "intents": [
+    {
+      "id": "create-page-menu",
+      "description": "Créer une page et l’ajouter au menu",
+      "examples": [
+        "branche service à une nouvelle page de service",
+        "ajoute une page services au menu",
+        "crée une page contact et son entrée de menu"
+      ]
+    },
+    {
+      "id": "create-page",
+      "description": "Créer une nouvelle page de contenu",
+      "examples": [
+        "ajoute une page de présentation",
+        "crée une nouvelle page"
+      ]
+    }
+  ],
+  "instructions": [
+    "Utiliser les collections pages, actions et blocks.",
+    "Créer une page avec un titre et un slug.",
+    "Créer un menu_item sous nav_main avec le titre de la page.",
+    "Créer une action navigate_page et la relier au menu_item.",
+    "Ne jamais inventer d’identifiant : utiliser les identifiants générés par l’hôte.",
+    "Si la création d’une page et d’un menu item nécessite plusieurs nouveaux identifiants liés, demander une clarification ou signaler la limite au lieu de produire une référence inventée."
+  ],
+  "context": {
+    "include": ["structure", "references", "scopes", "insertion"],
+    "maxCandidates": 8
+  },
+  "operations": {
+    "allowed": ["insert", "insertChild", "set"],
+    "constraints": [
+      "une page doit avoir un titre",
+      "un menu_item doit être placé sous un menu",
+      "une action doit référencer une page existante",
+      "aucune référence inventée"
+    ]
+  },
+  "examples": [
+    {
+      "request": "branche service à une nouvelle page de service",
+      "notes": "Créer la page et préparer son entrée de menu. Vérifier la capacité du cœur à chaîner les identifiants générés."
+    }
+  ]
+}

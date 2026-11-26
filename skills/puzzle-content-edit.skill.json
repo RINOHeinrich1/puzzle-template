@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "format": "onirtech.ai-skill.v1",
+  "id": "puzzle-content-edit",
+  "title": "Édition de contenu",
+  "description": "Modifier le texte, le titre ou les médias d’un bloc ou d’une page.",
+  "version": "1.0.0",
+  "priority": 10,
+  "always": false,
+  "intents": [
+    {
+      "id": "edit-text",
+      "description": "Modifier un texte ou un titre",
+      "examples": [
+        "change le titre de la section Services",
+        "modifie le texte du bouton",
+        "renomme la page À propos"
+      ]
+    },
+    {
+      "id": "edit-image",
+      "description": "Modifier une image ou un média",
+      "examples": [
+        "remplace l’image de la carte",
+        "change la photo du hero"
+      ]
+    }
+  ],
+  "instructions": [
+    "Distinguer une page d’un bloc.",
+    "Cibler le champ réel : title, text, subtitle, image_url, alt_text.",
+    "Ne pas modifier la structure si seule la valeur change.",
+    "Si la cible est ambiguë, demander une clarification."
+  ],
+  "context": {
+    "include": ["structure", "references"],
+    "maxCandidates": 8
+  },
+  "operations": {
+    "allowed": ["set"],
+    "constraints": [
+      "champ existant uniquement",
+      "aucune modification structurelle",
+      "aucun identifiant inventé"
+    ]
+  },
+  "examples": [
+    {
+      "request": "change le titre de la section Services",
+      "notes": "Cibler le bloc services et modifier title."
+    }
+  ]
+}
