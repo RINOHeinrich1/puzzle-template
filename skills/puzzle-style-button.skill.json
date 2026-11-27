@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "format": "onirtech.ai-skill.v1",
+  "id": "puzzle-style-button",
+  "title": "Style des boutons",
+  "description": "Modifier le style d’un bouton en créant un style local si nécessaire, sans casser un style partagé ni ses variantes responsive.",
+  "version": "1.1.0",
+  "priority": 25,
+  "always": false,
+  "intents": [
+    {
+      "id": "change-button-background",
+      "description": "Changer le fond ou la couleur d’un bouton",
+      "keywords": ["fond", "couleur", "bouton", "marron", "principal", "style", "apparence"],
+      "examples": [
+        "change le fond du bouton discuter",
+        "mets le bouton Nous contacter en marron",
+        "change la couleur du bouton principal"
+      ]
+    },
+    {
+      "id": "change-button-style",
+      "description": "Modifier le style visuel d’un bouton",
+      "keywords": ["arrondi", "bordure", "ombre", "taille", "padding", "style", "bouton"],
+      "examples": [
+        "arrondis le bouton",
+        "change le style du bouton",
+        "rends le bouton plus grand"
+      ]
+    }
+  ],
+  "instructions": [
+    "Cibler le bouton réel, pas son conteneur, sa région, son menu ou son parent.",
+    "Le bouton est un bloc kind button. Son style est référencé par blocks.style_id, jamais par du CSS direct.",
+    "Lire le style_id actuel du bouton. Si le style est partagé, ne jamais le modifier directement : créer une copie locale de style_profiles.",
+    "Un style local se crée par insert dans style_profiles, puis par set du champ style_id du bouton vers { \"$ref\": \"step-style-local\" }.",
+    "Le Plan DSL n’utilise pas bindTo. Ne jamais produire bindTo, d’identifiant brut, d’UUID ou de style_id inventé.",
+    "Lorsqu’un style est copié, copier aussi les overrides responsive associés dans responsive_styles si le contexte les expose. Sinon signaler explicitement que les variantes responsive n’ont pas été copiées.",
+    "Si le bouton possède déjà un style local, modifier ce style local ; ne pas créer de doublon inutile.",
+    "Les couleurs de Puzzle sont des rôles ou des valeurs du style, pas des noms de classes CSS. Ne jamais écrire de HTML ou de CSS.",
+    "Après le plan, vérifier que le style_id du bouton pointe vers le style local et que le rendu du bouton change, sans modifier les autres boutons.",
+    "Si le style partagé est utilisé par d’autres objets et que la demande est ambiguë, demander si l’utilisateur veut modifier partout ou seulement ce bouton."
+  ],
+  "context": {
+    "include": ["references", "scopes", "styles", "responsive_styles"],
+    "maxCandidates": 8
+  },
+  "operations": {
+    "allowed": ["insert", "set"],
+    "constraints": [
+      "créer une copie locale si le style est partagé",
+      "le champ de référence doit être style_id",
+      "ne pas modifier le style partagé",
+      "ne pas utiliser bindTo",
+      "aucun identifiant brut ou inventé",
+      "préserver les overrides responsive si présents",
+      "ne pas modifier les autres boutons"
+    ]
+  },
+  "examples": [
+    {
+      "request": "change le fond du bouton discuter en marron",
+      "notes": "Identifier le bouton réel, créer un style_profiles local avec les valeurs du style existant plus le fond marron, puis set blocks:<bouton>.style_id = { $ref: style-local }. Vérifier que les autres boutons ne changent pas."
+    },
+    {
+      "request": "arrondis le bouton principal",
+      "notes": "Cibler le bouton principal du hero. Créer ou réutiliser un style local et modifier radius dans ce style local, puis rebrancher style_id. Ne pas modifier le style partagé."
+    }
+  ]
+}

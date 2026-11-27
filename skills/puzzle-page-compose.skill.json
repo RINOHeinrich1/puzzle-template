@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "format": "onirtech.ai-skill.v1",
+  "id": "puzzle-page-compose",
+  "title": "Composer le contenu d’une page",
+  "description": "Créer ou remplir une page avec des titres, textes, grilles et cartes, puis créer les placements nécessaires.",
+  "version": "1.0.0",
+  "priority": 30,
+  "always": false,
+  "intents": [
+    {
+      "id": "fill-page",
+      "description": "Remplir une page existante",
+      "keywords": ["page", "vide", "remplir", "contenu", "section", "liste", "services"],
+      "examples": [
+        "remplis la page Services",
+        "la page est vide, ajoute du contenu",
+        "ajoute une liste de services à la page Services"
+      ]
+    },
+    {
+      "id": "create-page-content",
+      "description": "Créer une page avec son contenu",
+      "keywords": ["créer", "page", "services", "contenu", "présentation"],
+      "examples": [
+        "crée une page Services avec la liste des services",
+        "ajoute une page de présentation avec un titre et du texte"
+      ]
+    },
+    {
+      "id": "page-grid",
+      "description": "Créer une grille de cartes sur une page",
+      "keywords": ["grille", "cartes", "liste", "services", "page"],
+      "examples": [
+        "ajoute une grille de services",
+        "présente les services sous forme de cartes"
+      ]
+    }
+  ],
+  "instructions": [
+    "Identifier la page cible par son libellé ou son candidat. Si elle n’existe pas, la créer avec insert dans pages.",
+    "Créer le contenu avec insert pour les blocs et insertChild pour les relier à la page.",
+    "Pour placer un bloc sous une page, utiliser insertChild avec parent { \"$ref\": \"step-page\" } ou un candidat pages, collection blocks et slot main.",
+    "Pour une liste de services, créer un bloc heading, puis un bloc grid, puis les cartes sous la grille avec insertChild.",
+    "Utiliser uniquement les opérations DSL insert, insertChild et set. Ne jamais utiliser addBlock, createPage, placeBlock ou une opération inventée.",
+    "Ne jamais fournir d’identifiant brut, d’UUID ou de style_id inventé. Utiliser $candidate pour l’existant et $ref pour un objet créé dans le plan.",
+    "Pour style_id, utiliser uniquement un candidat de style existant ; sinon laisser le champ vide pour hériter du style.",
+    "Ne jamais utiliser bindTo.",
+    "Après création, vérifier que chaque bloc possède un placement et qu’il est visible sur sa page.",
+    "Si la page cible n’est pas identifiable, demander une clarification au lieu de créer un doublon."
+  ],
+  "context": {
+    "include": ["structure", "references", "insertion", "scopes", "placements"],
+    "maxCandidates": 16
+  },
+  "operations": {
+    "allowed": ["insert", "insertChild", "set"],
+    "constraints": [
+      "page cible existante ou créée par $ref",
+      "aucun bloc sans placement",
+      "aucune opération inconnue",
+      "aucun style_id inventé",
+      "aucun identifiant brut",
+      "aucun bindTo",
+      "vérifier le slot main pour le contenu de page"
+    ]
+  },
+  "examples": [
+    {
+      "request": "la page Services est vide, remplis-la avec nos services",
+      "notes": "Identifier la page Services. Créer un heading sous la page via insertChild parent { $candidate: pages:services } ou $ref si la page est créée. Créer une grid, puis les cartes sous la grid. Utiliser le slot main. Laisser style_id vide si aucun profil candidat n’est disponible."
+    },
+    {
+      "request": "crée une page Services avec la liste des services",
+      "notes": "1) insert pages title Services ; 2) insertChild heading sous la page avec parent { $ref: step-page } ; 3) insertChild grid sous la page ; 4) insertChild cartes sous la grid. Ne pas utiliser d’opération inconnue."
+    }
+  ]
+}

@@ -4,7 +4,7 @@
   "id": "puzzle",
   "name": "Puzzle",
   "description": "Moteur de composition de pages et de conversation personnalisables.",
-  "version": "1.1.0-beta.3",
+  "version": "1.1.0-beta.14",
   "publisher": {
     "id": "onirtech",
     "name": "ONIRTECH",
@@ -17,7 +17,7 @@
     "mode": "web-component",
     "entry": "./index.js",
     "element": "onirtech-template-puzzle",
-    "integrity": "sha256-bt+EQIc7tEaMZ73ObhgZQhFDpatV52TH0yAyDrnlP/M=",
+    "integrity": "sha256-SkSUqxYMK/h5mbjlJKT8Ni+H31eBzjRpbCDZQTWhTl4=",
     "shadowDom": "open"
   },
   "capabilities": [
@@ -4247,7 +4247,8 @@
             "chat_trigger",
             "video_link",
             "list_item",
-            "statistic"
+            "statistic",
+            "article_list"
           ]
         }
       },
@@ -4257,8 +4258,6 @@
         "visibleWhen": {
           "field": "kind",
           "in": [
-            "hero",
-            "card",
             "button",
             "link",
             "logo",
@@ -5109,7 +5108,69 @@
             "title": "Nouvelle carte"
           }
         }
+      },
+      {
+        "parentKind": "page",
+        "childCollection": "blocks",
+        "allowedKinds": [
+          "section",
+          "hero",
+          "heading",
+          "text",
+          "card",
+          "grid",
+          "button",
+          "image",
+          "chat",
+          "tabs",
+          "accordion",
+          "social_links"
+        ],
+        "slot": "main",
+        "defaults": {
+          "text": {
+            "text": ""
+          },
+          "section": {
+            "title": "Nouvelle section"
+          },
+          "heading": {
+            "title": "Nouveau titre"
+          }
+        }
       }
     ]
-  }
+  },
+  "aiSkills": [
+    {
+      "id": "puzzle-content-edit",
+      "format": "onirtech.ai-skill.v1",
+      "path": "skills/puzzle-content-edit.skill.json",
+      "integrity": "sha256-6iGkH/6s59cPYp22noYQEM2rw+uR1CmIx5DFh6ZgdBU="
+    },
+    {
+      "id": "puzzle-page-menu",
+      "format": "onirtech.ai-skill.v1",
+      "path": "skills/puzzle-page-menu.skill.json",
+      "integrity": "sha256-8/jk72LtDKt7v+QpTPu6d2bPbJ9JqiIlCDspfLRIXus="
+    },
+    {
+      "id": "puzzle-style-button",
+      "format": "onirtech.ai-skill.v1",
+      "path": "skills/puzzle-style-button.skill.json",
+      "integrity": "sha256-jK5iTx0LBf2HtfCvFnncgqbD0vWfob39VLUAkApYbvc="
+    },
+    {
+      "id": "puzzle-page-compose",
+      "format": "onirtech.ai-skill.v1",
+      "path": "skills/puzzle-page-compose.skill.json",
+      "integrity": "sha256-BcEmK2Xlr1C158Bi93X0kGw0qSZnEUDD69HZsRllxt8="
+    },
+    {
+      "id": "puzzle-structure",
+      "format": "onirtech.ai-skill.v1",
+      "path": "skills/puzzle-structure.skill.json",
+      "integrity": "sha256-PjfeWH3T3/LdbMXrdsQImE9oFAuXYwMzWejEkKZU1ZA="
+    }
+  ]
 }
