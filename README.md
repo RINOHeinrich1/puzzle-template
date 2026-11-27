@@ -4,9 +4,9 @@ Template visuel Puzzle pour ONIR CMS.
 
 ## Version courante
 
-- `1.1.0-beta.4`
+- `1.1.0-beta.11`
 - Contrat : Editor V2
-- Archive : `puzzle-1.1.0-beta.4.onirtech-template`
+- Archive : `puzzle-1.1.0-beta.11.onirtech-template`
 
 ## Contenu
 
@@ -30,7 +30,8 @@ La version embarque :
 
 - `puzzle-page-menu` : création de page et d’entrée de menu ;
 - `puzzle-style-button` : styles de boutons et copies locales ;
-- `puzzle-content-edit` : édition de textes et médias.
+- `puzzle-content-edit` : édition de textes et médias ;
+- `puzzle-structure` : placements, visibilité, actions et styles partagés.
 
 Les skills sont déclarés dans `onirtech.template.json` via `aiSkills` et installés
 avec l’archive. Ils ne sont jamais chargés depuis une source externe.

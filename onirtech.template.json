@@ -4,7 +4,7 @@
   "id": "puzzle",
   "name": "Puzzle",
   "description": "Moteur de composition de pages et de conversation personnalisables.",
-  "version": "1.1.0-beta.4",
+  "version": "1.1.0-beta.11",
   "publisher": {
     "id": "onirtech",
     "name": "ONIRTECH",
@@ -5109,6 +5109,36 @@
             "title": "Nouvelle carte"
           }
         }
+      },
+      {
+        "parentKind": "page",
+        "childCollection": "blocks",
+        "allowedKinds": [
+          "section",
+          "hero",
+          "heading",
+          "text",
+          "card",
+          "grid",
+          "button",
+          "image",
+          "chat",
+          "tabs",
+          "accordion",
+          "social_links"
+        ],
+        "slot": "main",
+        "defaults": {
+          "text": {
+            "text": ""
+          },
+          "section": {
+            "title": "Nouvelle section"
+          },
+          "heading": {
+            "title": "Nouveau titre"
+          }
+        }
       }
     ]
   },
@@ -5117,19 +5147,25 @@
       "id": "puzzle-content-edit",
       "format": "onirtech.ai-skill.v1",
       "path": "skills/puzzle-content-edit.skill.json",
-      "integrity": "sha256-qe1Sp/sSvf2AtOR9f4uphFGIuk7595Vs/cY0kalhlsA="
+      "integrity": "sha256-6iGkH/6s59cPYp22noYQEM2rw+uR1CmIx5DFh6ZgdBU="
     },
     {
       "id": "puzzle-page-menu",
       "format": "onirtech.ai-skill.v1",
       "path": "skills/puzzle-page-menu.skill.json",
-      "integrity": "sha256-+yX2XUAbeeaT6px/r5lzgTwkF2u3xMOdAHhvg54/Ib8="
+      "integrity": "sha256-8/jk72LtDKt7v+QpTPu6d2bPbJ9JqiIlCDspfLRIXus="
     },
     {
       "id": "puzzle-style-button",
       "format": "onirtech.ai-skill.v1",
       "path": "skills/puzzle-style-button.skill.json",
-      "integrity": "sha256-S8RLTqbuX9Y7HGQjs4pyf+i3Xix5bVpF30frVYpIVEU="
+      "integrity": "sha256-jK5iTx0LBf2HtfCvFnncgqbD0vWfob39VLUAkApYbvc="
+    },
+    {
+      "id": "puzzle-structure",
+      "format": "onirtech.ai-skill.v1",
+      "path": "skills/puzzle-structure.skill.json",
+      "integrity": "sha256-0pLiGKax0Bb0NYPpMDN1ivVwTrduFePf5t+TWjy5dyw="
     }
   ]
 }

@@ -3,54 +3,88 @@
   "format": "onirtech.ai-skill.v1",
   "id": "puzzle-page-menu",
   "title": "Créer une page et son entrée de menu",
-  "description": "Compose une nouvelle page et son entrée de menu dans Puzzle.",
-  "version": "1.0.0",
+  "description": "Créer une page Puzzle et son entrée de menu, avec action et placement, sans inventer d’identifiant.",
+  "version": "1.1.4",
   "priority": 20,
   "always": false,
   "intents": [
     {
       "id": "create-page-menu",
       "description": "Créer une page et l’ajouter au menu",
+      "keywords": ["page", "menu", "entrée", "header", "nav_main", "contact", "services", "ajouter", "créer"],
       "examples": [
         "branche service à une nouvelle page de service",
         "ajoute une page services au menu",
-        "crée une page contact et son entrée de menu"
+        "crée une page contact et son entrée de menu",
+        "ajoute une entrée Blog dans le header vers la page Journal"
       ]
     },
     {
       "id": "create-page",
       "description": "Créer une nouvelle page de contenu",
+      "keywords": ["page", "contenu", "présentation", "nouvelle", "créer"],
       "examples": [
         "ajoute une page de présentation",
         "crée une nouvelle page"
       ]
+    },
+    {
+      "id": "add-menu-item",
+      "description": "Ajouter une entrée vers une page existante",
+      "keywords": ["menu", "entrée", "header", "lien", "navigation", "ajouter"],
+      "examples": [
+        "ajoute le menu Blog vers la page Journal",
+        "mets un lien Contact dans le header"
+      ]
     }
   ],
   "instructions": [
-    "Utiliser les collections pages, actions et blocks.",
-    "Créer une page avec un titre et un slug.",
-    "Créer un menu_item sous nav_main avec le titre de la page.",
-    "Créer une action navigate_page et la relier au menu_item.",
-    "Ne jamais inventer d’identifiant : utiliser les identifiants générés par l’hôte.",
-    "Si la création d’une page et d’un menu item nécessite plusieurs nouveaux identifiants liés, demander une clarification ou signaler la limite au lieu de produire une référence inventée."
+    "Un menu est un bloc kind menu. Ses entrées sont des blocs kind menu_item reliés par des placements, pas un tableau d’enfants intégré.",
+    "Le menu principal du header est blocks:nav_main. Une entrée de menu se crée sous ce parent, dans blocks, avec slot content.",
+    "Utiliser insertChild pour créer le menu_item et son placement atomiquement sous blocks:nav_main.",
+    "Toujours ordonner les créations : page, action, puis insertChild du menu_item sous nav_main.",
+    "Pour chaîner des objets créés, utiliser les références de plan { \"$ref\": \"step-id\" }. Ne jamais écrire un identifiant brut ou un UUID inventé.",
+    "Un objet créé doit être référencé par un $ref d’étape, ou par un $candidate s’il existait déjà. Le core génère les identifiants.",
+    "Pour une page, header_id et footer_id sont optionnels et référencent regions. Si regions:header_main et regions:footer_main sont dans les candidats, utiliser { \"$candidate\": \"regions:header_main\" } et { \"$candidate\": \"regions:footer_main\" }. Sinon les omettre et le signaler ; ne jamais utiliser pages:home, un ID brut ou un UUID inventé.",
+    "Pour une action navigate_page, target doit être une page existante ou une page créée par $ref.",
+    "Le insertChild du menu_item doit avoir parent blocks:nav_main, collection blocks, kind menu_item, slot content et values title + action_id.",
+    "Si la demande inclut un texte de page, créer aussi un bloc kind text avec ce texte, puis l’insérer sous la page avec insertChild parent { \"$ref\": \"step-page\" }, collection blocks, kind text, slot main.",
+    "Si une page existe déjà et que seule l’entrée de menu est demandée, ne pas créer de page. Créer uniquement l’action et le menu_item via insertChild.",
+    "Un bloc sans placement existe mais n’est pas rendu. Vérifier le placement et la visibilité après création.",
+    "Ne jamais utiliser bindTo : le Plan DSL utilise $ref et $candidate. Ne jamais modifier un style ou une action partagée pour créer un menu.",
+    "Si une chaîne de créations ne peut pas être exprimée avec les opérations autorisées, retourner un warning explicite plutôt qu’un plan incomplet ou des identifiants inventés."
   ],
   "context": {
-    "include": ["structure", "references", "scopes", "insertion"],
+    "include": ["structure", "references", "scopes", "insertion", "placements"],
     "maxCandidates": 8
   },
   "operations": {
     "allowed": ["insert", "insertChild", "set"],
     "constraints": [
       "une page doit avoir un titre",
-      "un menu_item doit être placé sous un menu",
-      "une action doit référencer une page existante",
-      "aucune référence inventée"
+      "un slug de page doit être stable et lisible",
+      "header_id et footer_id, s’ils sont fournis, doivent cibler une region candidate",
+      "ne jamais fabriquer header_id ou footer_id si la region n’est pas candidate",
+      "un menu_item doit être placé sous nav_main par insertChild",
+      "un menu_item doit avoir une action valide",
+      "une action doit référencer une page existante ou créée par $ref",
+      "aucune référence brute ou inventée",
+      "aucun menu_item orphelin",
+      "aucun style partagé modifié"
     ]
   },
   "examples": [
     {
+      "request": "Crée une page Contact avec un titre « Contact » et un texte « Écrivez-nous », puis rattache-la au menu principal.",
+      "notes": "Plan attendu : (1) insert pages avec title Contact, slug contact, description ; ajouter header_id/footer_id seulement si regions:header_main et regions:footer_main sont candidats, sinon les omettre avec warning ; (2) insert actions kind navigate_page avec target { $ref: page } ; (3) insertChild sous blocks:nav_main avec collection blocks, kind menu_item, slot content, values title Contact et action_id { $ref: action } ; (4) créer le texte de page seulement si une règle d’insertion page→text existe ; sinon retourner un warning explicite plutôt qu’inventer un placement. Les identifiants sont générés par l’hôte."
+    },
+    {
+      "request": "ajoute le menu Blog vers la page Journal",
+      "notes": "La page Journal existe. Ne pas créer de page. Créer une action navigate_page target { $candidate: pages:journal }, puis insertChild sous blocks:nav_main avec collection blocks, kind menu_item, slot content, values title Blog et action_id { $ref: action }."
+    },
+    {
       "request": "branche service à une nouvelle page de service",
-      "notes": "Créer la page et préparer son entrée de menu. Vérifier la capacité du cœur à chaîner les identifiants générés."
+      "notes": "Créer la page, l’action, puis le menu_item via insertChild sous nav_main. Utiliser des $ref pour target et action_id. Vérifier que le menu_item est placé sous nav_main et qu’il n’existe pas déjà une entrée Services."
     }
   ]
 }

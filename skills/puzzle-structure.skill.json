@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "format": "onirtech.ai-skill.v1",
+  "id": "puzzle-structure",
+  "title": "Structure, placements, styles et actions",
+  "description": "Comprendre le graphe Puzzle : pages, régions, blocs, placements, actions et styles partagés. Utiliser ce skill pour les demandes structurelles ou les erreurs de visibilité.",
+  "version": "1.0.2",
+  "priority": 5,
+  "always": false,
+  "intents": [
+    {
+      "id": "explain-placement",
+      "description": "Comprendre ou corriger le placement et la visibilité d’un élément",
+      "keywords": ["placement", "visibilité", "affiché", "invisible", "orphelin", "menu", "header", "slot", "position"],
+      "examples": [
+        "pourquoi mon menu ne s’affiche pas",
+        "où est placé ce bloc",
+        "ajoute une entrée au header",
+        "supprime le menu Services"
+      ]
+    },
+    {
+      "id": "explain-style-action",
+      "description": "Comprendre ou corriger un style ou une action partagée",
+      "keywords": ["style", "partagé", "action", "lien", "couleur", "bouton", "provenance", "héritage"],
+      "examples": [
+        "pourquoi changer le style du bouton change les autres pages",
+        "où est définie l’action du menu",
+        "crée une copie locale du style"
+      ]
+    },
+    {
+      "id": "add-header-entry",
+      "description": "Ajouter une entrée dans le header",
+      "keywords": ["header", "menu", "entrée", "nav_main", "navigation", "ajouter"],
+      "examples": [
+        "ajoute une entrée Blog dans le header",
+        "mets un lien Contact dans le menu principal"
+      ]
+    }
+  ],
+  "instructions": [
+    "Le header n’est pas une simple liste : une page référence une région par pages.header_id, et la région header_main est partagée par plusieurs pages.",
+    "Le header contient des enfants par placements. Un placement possède parent_kind, parent_id, child_id, slot et position.",
+    "Le menu principal est le bloc blocks:nav_main kind menu. Ses entrées sont des blocs kind menu_item reliés par des placements parent_kind=block, parent_id=nav_main, slot=content.",
+    "Utiliser insertChild pour créer un enfant et son placement atomiquement sous son parent.",
+    "Un bloc peut exister sans placement. Il est alors présent dans la collection mais absent du rendu. Créer un bloc ne suffit jamais à le rendre visible.",
+    "Un objet est réellement rendu seulement si la chaîne est complète : page → header_id → région → placement → bloc → kind supporté → visible=true.",
+    "Les actions sont un graphe séparé. Un bouton ou menu_item référence une action par action_id. Une action navigate_page cible une page, navigate_article cible un article, open_chat ou scroll_to ciblent un bloc.",
+    "Les actions et les styles peuvent être partagés. Une modification directe d’un style partagé affecte tous les objets qui le référencent. Local par défaut, partagé par exception.",
+    "Ne jamais fournir d’identifiant brut dans une valeur de référence. Utiliser { \"$candidate\": \"collection:itemId\" } pour l’existant et { \"$ref\": \"step-id\" } pour un objet créé dans le plan.",
+    "Ne jamais utiliser bindTo. Le Plan DSL v1 repose sur set, insert, insertChild, move, remove, duplicate et les références typées.",
+    "Avant d’ajouter une entrée de menu, vérifier si elle existe déjà. Après création, vérifier l’action, le placement, le slot et la position.",
+    "Pour supprimer une entrée, supprimer son placement en priorité. Ne pas supprimer une action partagée si d’autres objets l’utilisent. Vérifier les usages avant toute suppression.",
+    "Si une erreur INVALID_REFERENCE_TYPE apparaît, la valeur du champ de référence est une chaîne brute : la remplacer par $candidate ou $ref.",
+    "Si une erreur INVALID_CANDIDATE_ID apparaît, l’étape référence un objet inexistant ou un identifiant d’étape mal formé : corriger l’id d’étape ou le candidateId, ne pas inventer d’identifiant.",
+    "Si le rendu ne change pas alors que le plan est accepté, vérifier dans cet ordre : kind du bloc, champ réellement lu, placement, visible, style ou action référencé."
+  ],
+  "context": {
+    "include": ["structure", "references", "scopes", "insertion", "placements", "styles", "actions"],
+    "maxCandidates": 12
+  },
+  "operations": {
+    "allowed": ["set", "insert", "insertChild", "remove", "move", "duplicate"],
+    "constraints": [
+      "aucun bloc orphelin",
+      "aucun identifiant brut dans une référence",
+      "aucun bindTo",
+      "aucune action partagée supprimée sans vérification des usages",
+      "aucun style partagé modifié sans copie locale",
+      "toute création de menu_item doit être placée sous nav_main",
+      "toute action doit avoir une cible du type attendu",
+      "toute suppression doit vérifier les placements et usages"
+    ]
+  },
+  "examples": [
+    {
+      "request": "Ajoute une entrée Blog dans le header vers la page Journal.",
+      "notes": "La page Journal existe. Créer une action navigate_page target { $candidate: pages:journal }, puis insertChild sous blocks:nav_main avec collection blocks, kind menu_item, slot content, values title Blog et action_id { $ref: action }."
+    },
+    {
+      "request": "Pourquoi mon menu ne s’affiche pas ?",
+      "notes": "Vérifier pages.header_id, la région header_main, le placement parent_kind=region parent_id=header_main, le placement du menu_item sous nav_main, le kind, visible et les actions. Un bloc non placé n’est pas rendu."
+    },
+    {
+      "request": "Change le style du bouton sans changer les autres boutons.",
+      "notes": "Lire blocks.style_id. Si le style est partagé, créer un style local, le rattacher par style_id, puis vérifier que les autres boutons conservent leur style."
+    }
+  ]
+}

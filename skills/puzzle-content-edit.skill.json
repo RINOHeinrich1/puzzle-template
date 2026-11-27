@@ -3,37 +3,50 @@
   "format": "onirtech.ai-skill.v1",
   "id": "puzzle-content-edit",
   "title": "Édition de contenu",
-  "description": "Modifier le texte, le titre ou les médias d’un bloc ou d’une page.",
-  "version": "1.0.0",
+  "description": "Modifier le texte, le titre, le sous-titre ou les médias d’un bloc ou d’une page, sans modifier la structure, les styles ou les actions.",
+  "version": "1.1.1",
   "priority": 10,
   "always": false,
   "intents": [
     {
       "id": "edit-text",
       "description": "Modifier un texte ou un titre",
+      "keywords": ["titre", "texte", "sous-titre", "bouton", "section", "contenu", "renommer", "modifier"],
       "examples": [
         "change le titre de la section Services",
         "modifie le texte du bouton",
-        "renomme la page À propos"
+        "renomme la page À propos",
+        "change le titre du hero en Bienvenue",
+        "mets le texte du bouton principal à Découvrir"
       ]
     },
     {
       "id": "edit-image",
       "description": "Modifier une image ou un média",
+      "keywords": ["image", "photo", "média", "logo", "illustration", "remplacer", "visuel"],
       "examples": [
         "remplace l’image de la carte",
-        "change la photo du hero"
+        "change la photo du hero",
+        "mets un nouveau logo"
       ]
     }
   ],
   "instructions": [
-    "Distinguer une page d’un bloc.",
-    "Cibler le champ réel : title, text, subtitle, image_url, alt_text.",
-    "Ne pas modifier la structure si seule la valeur change.",
-    "Si la cible est ambiguë, demander une clarification."
+    "Distinguer une page d’un bloc : pages porte title, slug, description ; blocks porte title, subtitle, text, image_url et alt_text.",
+    "Cibler l’instance réelle dans la collection blocks, pas son conteneur, sa région ou son menu.",
+    "Pour une page, utiliser pages:<pageId> ; pour un bloc, utiliser blocks:<blockId>.",
+    "Un champ peut exister dans le schéma sans être rendu pour le kind courant. Vérifier la matrice des kinds avant de modifier.",
+    "Matrice minimale des kinds : logo utilise title, image_url, alt_text et action_id ; menu n’a pas de contenu direct, ses entrées sont des enfant placés ; menu_item utilise title et action_id ; button utilise title, variant et action_id ; card utilise title, text et image_url.",
+    "Dans Puzzle, le CTA principal visible du hero est blocks:hero_discover. blocks:hero_button est le bouton de contact et blocks:theme_btn est le bouton de thème du header. Une demande de « bouton principal » doit cibler hero_discover, pas hero_button.",
+    "Si plusieurs champs sont demandés dans la même phrase, produire une étape set par champ. Ne jamais s’arrêter après le premier champ.",
+    "Pour une image, modifier image_url et alt_text si le texte alternatif est demandé ou devient obsolète.",
+    "Pour un contenu seul, ne pas créer, déplacer, supprimer ni re-placer d’objet.",
+    "Ne jamais fournir d’identifiant brut dans un champ de référence. Une référence existante s’écrit { \"$candidate\": \"collection:itemId\" }.",
+    "Si la cible est ambiguë, demander une clarification. Si un champ n’est pas rendu pour le kind, le signaler plutôt que produire une mutation sans effet.",
+    "Après le plan, vérifier chaque valeur demandée dans l’objet ciblé et dans le rendu."
   ],
   "context": {
-    "include": ["structure", "references"],
+    "include": ["structure", "references", "placements"],
     "maxCandidates": 8
   },
   "operations": {
@@ -41,13 +54,24 @@
     "constraints": [
       "champ existant uniquement",
       "aucune modification structurelle",
-      "aucun identifiant inventé"
+      "aucun style ni action modifié",
+      "aucun identifiant inventé",
+      "toutes les valeurs demandées doivent être présentes dans le plan",
+      "aucune valeur brute ne doit être utilisée comme référence"
     ]
   },
   "examples": [
     {
+      "request": "Change le titre du hero en « Bienvenue chez ONIR-CMS » et mets le texte du bouton principal à « Découvrir nos services ».",
+      "notes": "Deux étapes set : blocks:hero_main.title = Bienvenue chez ONIR-CMS, puis blocks:hero_discover.title = Découvrir nos services. Ne pas oublier la seconde étape. Le bouton principal visible du hero est hero_discover ; hero_button est le bouton de contact et theme_btn le thème du header."
+    },
+    {
       "request": "change le titre de la section Services",
-      "notes": "Cibler le bloc services et modifier title."
+      "notes": "Cibler blocks:services et modifier title. Ne pas modifier le menu, la page ni les placements."
+    },
+    {
+      "request": "remplace l’image de la carte",
+      "notes": "Cibler blocks:<carte> et modifier image_url. Si la carte a un texte alternatif obsolète, proposer aussi alt_text."
     }
   ]
 }
