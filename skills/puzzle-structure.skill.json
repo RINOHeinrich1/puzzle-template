@@ -4,9 +4,9 @@
   "id": "puzzle-structure",
   "title": "Structure, placements, styles et actions",
   "description": "Comprendre le graphe Puzzle : pages, régions, blocs, placements, actions et styles partagés. Utiliser ce skill pour les demandes structurelles ou les erreurs de visibilité.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "priority": 5,
-  "always": false,
+  "always": true,
   "intents": [
     {
       "id": "explain-placement",
