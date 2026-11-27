@@ -4,9 +4,9 @@ Template visuel Puzzle pour ONIR CMS.
 
 ## Version courante
 
-- `1.1.0-beta.12`
+- `1.1.0-beta.13`
 - Contrat : Editor V2
-- Archive : `puzzle-1.1.0-beta.12.onirtech-template`
+- Archive : `puzzle-1.1.0-beta.13.onirtech-template`
 
 ## Contenu
 

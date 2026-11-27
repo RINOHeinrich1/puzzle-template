@@ -4,7 +4,7 @@
   "id": "puzzle-structure",
   "title": "Structure, placements, styles et actions",
   "description": "Comprendre le graphe Puzzle : pages, régions, blocs, placements, actions et styles partagés. Utiliser ce skill pour les demandes structurelles ou les erreurs de visibilité.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "priority": 5,
   "always": false,
   "intents": [
@@ -49,6 +49,7 @@
     "Les actions sont un graphe séparé. Un bouton ou menu_item référence une action par action_id. Une action navigate_page cible une page, navigate_article cible un article, open_chat ou scroll_to ciblent un bloc.",
     "Les actions et les styles peuvent être partagés. Une modification directe d’un style partagé affecte tous les objets qui le référencent. Local par défaut, partagé par exception.",
     "Ne jamais fournir d’identifiant brut dans une valeur de référence. Utiliser { \"$candidate\": \"collection:itemId\" } pour l’existant et { \"$ref\": \"step-id\" } pour un objet créé dans le plan.",
+    "Pour retirer une action ou une autre référence optionnelle, utiliser une opération unset sur le champ concerné. Ne jamais écrire une chaîne vide, null ou une valeur brute dans un champ de référence.",
     "Ne jamais utiliser bindTo. Le Plan DSL v1 repose sur set, insert, insertChild, move, remove, duplicate et les références typées.",
     "Avant d’ajouter une entrée de menu, vérifier si elle existe déjà. Après création, vérifier l’action, le placement, le slot et la position.",
     "Pour supprimer une entrée, supprimer son placement en priorité. Ne pas supprimer une action partagée si d’autres objets l’utilisent. Vérifier les usages avant toute suppression.",
@@ -65,6 +66,7 @@
     "constraints": [
       "aucun bloc orphelin",
       "aucun identifiant brut dans une référence",
+      "utiliser unset pour retirer une référence optionnelle",
       "aucun bindTo",
       "aucune action partagée supprimée sans vérification des usages",
       "aucun style partagé modifié sans copie locale",
